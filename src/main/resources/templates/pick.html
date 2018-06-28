@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>世界杯竞猜</title>
+    <style>
+        .space {
+            height: 10px;
+        }
+
+        .table {
+            border-collapse: collapse;
+            border: solid;
+            width: 450px;
+        }
+
+        .table th, td {
+            border-bottom: solid;
+        }
+
+        .flag-main {
+            text-align: center;
+            padding: 5px 0px 0px 10px;
+            float: left;
+            width: 100px;
+            height: 80px;
+        }
+
+        .flag {
+            width: 80px;
+            height: 50px;
+        }
+
+        .clear {
+            clear: both;
+        }
+
+        .pick {
+            text-decoration-line: none;
+            font-size: 14px;
+            padding: 0 0 0 5px;
+        }
+    </style>
+</head>
+<body>
+<div>
+    <h1>世界杯竞猜</h1>
+    <div th:class="space"></div>
+    <div>
+        <table th:class="table">
+            <tr>
+                <td colspan="4">
+                    <div th:class="flag-main">
+                        <img th:class="flag" th:src="@{/flag/日本.jpg}" th:alt="日本">
+                        <div>日本</div>
+                    </div>
+                    <div th:class="flag-main">
+                        <div style="padding-top: 20px">
+                            <strong>VS</strong>
+                        </div>
+                    </div>
+                    <div th:class="flag-main">
+                        <img th:class="flag" th:src="@{/flag/波兰.jpg}" th:alt="波兰">
+                        <div>波兰</div>
+                    </div>
+                </td>
+                <td>
+                    <a th:class="pick" href="/prediction">比分预测&nbsp;&gt;&gt;</a>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="4">
+                    <div th:class="flag-main">
+                        <img th:class="flag" th:src="@{/flag/英格兰.jpg}" th:alt="英格兰">
+                        <div>英格兰</div>
+                    </div>
+                    <div th:class="flag-main">
+                        <div style="padding-top: 20px">
+                            <strong>VS</strong>
+                        </div>
+                    </div>
+                    <div th:class="flag-main">
+                        <img th:class="flag" th:src="@{/flag/比利时.jpg}" th:alt="比利时">
+                        <div>比利时</div>
+                    </div>
+                </td>
+                <td>
+                    <a th:class="pick" href="/prediction">比分预测&nbsp;&gt;&gt;</a>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="4">
+                    <div th:class="flag-main">
+                        <img th:class="flag" th:src="@{/flag/巴拿马.jpg}" th:alt="巴拿马">
+                        <div>巴拿马</div>
+                    </div>
+                    <div th:class="flag-main">
+                        <div style="padding-top: 20px">
+                            <strong>VS</strong>
+                        </div>
+                    </div>
+                    <div th:class="flag-main">
+                        <img th:class="flag" th:src="@{/flag/突尼斯.jpg}" th:alt="突尼斯.jpg">
+                        <div>突尼斯</div>
+                    </div>
+                </td>
+                <td>
+                    <a th:class="pick" href="/prediction">比分预测&nbsp;&gt;&gt;</a>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+</body>
+</html>

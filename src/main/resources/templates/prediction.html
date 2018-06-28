@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>比分预测</title>
+    <script th:src="@{/js/jquery-3.2.1.min.js}"></script>
+    <style>
+        table {
+            border-collapse: collapse;
+            border: solid;
+            width: 500px;
+            height: 400px;
+            background: aquamarine;
+        }
+        table th,td {
+            text-align: center;
+            border: solid;
+        }
+        @keyframes block {
+            0%  {left:0px; bottom:400px;}
+            11% {left:400px; bottom:400px;}
+            22% {left:400px; bottom:320px;}
+            33% {left:0px; bottom:320px;}
+            44% {left:0px; bottom:240px;}
+            55% {left:400px; bottom:240px;}
+            66% {left:400px; bottom:160px;}
+            77% {left:0px; bottom:160px;}
+            88% {left:0px; bottom:80px;}
+            100% {left:400px; bottom:80px;}
+        }
+        .move-block {
+            display: none;
+            position: relative;
+            width: 100px;
+            height: 80px;
+            background: yellow;
+            opacity: 0.88;
+            animation: block 0.5s;
+            animation-direction: alternate;
+            animation-iteration-count: 1;
+            animation-play-state: paused;
+            animation-fill-mode: forwards;
+        }
+    </style>
+    <script>
+        function runBlock() {
+            $('#block').show();
+            $('#block').css("animation-play-state", "running");
+        }
+    </script>
+</head>
+<body>
+<div>
+    <h1>比分预测</h1>
+    <!--比分预测表格-->
+    <div>
+        <table>
+            <tr th:each="i:${#numbers.sequence(0,4)}">
+                <td th:text="${i + ' : ' + 0}">0 : 0</td>
+                <td th:text="${i + ' : ' + 1}">1 : 0</td>
+                <td th:text="${i + ' : ' + 2}">2 : 0</td>
+                <td th:text="${i + ' : ' + 3}">3 : 0</td>
+                <td th:text="${i + ' : ' + 4}">4 : 0</td>
+            </tr>
+        </table>
+        <div id="block" th:class="move-block"></div>
+
+    </div>
+</div>
+</body>
+</html>
