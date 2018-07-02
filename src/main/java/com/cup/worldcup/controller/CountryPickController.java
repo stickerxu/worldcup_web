@@ -7,8 +7,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class CountryPickController {
 
     @GetMapping({"/",""})
-    public String pickPage() {
+    public String index() {
+        return "index";
+    }
 
+    @GetMapping("/pick")
+    public String pickPage() {
         return "pick";
     }
 

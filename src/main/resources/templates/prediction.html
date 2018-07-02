@@ -32,22 +32,47 @@
         .move-block {
             display: none;
             position: relative;
-            width: 100px;
-            height: 80px;
-            background: yellow;
-            opacity: 0.88;
-            animation: block 0.5s;
-            animation-direction: alternate;
-            animation-iteration-count: 1;
+            width: 95px;
+            height: 75px;
+            border: red solid 4px;
+            animation: block;
+            animation-duration: 5s;
+            animation-iteration-count: infinite;
             animation-play-state: paused;
             animation-fill-mode: forwards;
         }
+        .btn-begin {
+            position: absolute;
+            left: 325px;
+            top: 520px;
+            width: 80px;
+            height: 50px;
+        }
     </style>
     <script>
-        function runBlock() {
-            $('#block').show();
-            $('#block').css("animation-play-state", "running");
-        }
+        $(function () {
+            $('#btnBg').click(function () {
+                var attr = $('#block').css("animation-play-state");
+                if (attr == "running") {
+                    $('#block').css("animation-play-state", "paused")
+                } else {
+                    $('#block').show();
+                    $('#block').css("animation-play-state", "running");
+                    var speed = setInterval(speedUp, 100);
+                }
+            });
+            
+            function speedUp() {
+                var speed = $('#speed').val();
+                if (speed > 1) {
+                    $('#speed').val(speed-2.5);
+                } else {
+                    $('#speed').val(0.5);
+                }
+                $('#block').css("animation-duration", speed+"s");
+            }
+        });
+        
     </script>
 </head>
 <body>
@@ -64,8 +89,11 @@
                 <td th:text="${i + ' : ' + 4}">4 : 0</td>
             </tr>
         </table>
-        <div id="block" th:class="move-block"></div>
-
+        <div id="block" class="move-block"></div>
+        <div>
+            <button class="btn-begin" id="btnBg">开始</button>
+            <input type="hidden" id="speed" value="5.5">
+        </div>
     </div>
 </div>
 </body>
