@@ -20,20 +20,26 @@ public class EncryptionController {
     @GetMapping("/encryp")
     public String encryp(Model model) {
         model.addAttribute("encryp_method", "md5");
+        model.addAttribute("is_salt", 0);
         return "encryp";
     }
 
     @PostMapping("/encrypSub")
-    public String encrypSub(@RequestParam("encryp_content") String encryp_content, @RequestParam("encryp_method") String encryp_method, ModelMap modelMap) {
+    public String encrypSub(@RequestParam("encryp_content") String encryp_content, @RequestParam("encryp_method") String encryp_method,
+                            @RequestParam("is_salt") Integer is_salt, ModelMap modelMap) {
         try {
+            modelMap.put("encryp_content",encryp_content);
+            modelMap.put("encryp_method",encryp_method);
+            modelMap.put("is_salt",is_salt);
+            if (is_salt == 1) {
+                encryp_content = encryp_content + EncrptionUtil.generateSalt(64);
+            }
             switch (encryp_method) {
                 case "md5": modelMap.put("result", EncrptionUtil.md5(encryp_content));break;
                 case "sha1": modelMap.put("result", EncrptionUtil.sha1(encryp_content));break;
                 case "sha2": modelMap.put("result", EncrptionUtil.sha256(encryp_content));break;
                 default:break;
             }
-            modelMap.put("encryp_content",encryp_content);
-            modelMap.put("encryp_method",encryp_method);
             return "encryp";
         } catch (NoSuchAlgorithmException e) {
             logger.error(e.getMessage(),e);

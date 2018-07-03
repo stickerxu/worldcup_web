@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout}"
+      lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>登录</title>
+    <style>
+        fieldset {
+            text-align: center;
+            width: 350px;
+        }
+        fieldset label {
+            font-size: medium;
+        }
+        fieldset button {
+            width: 80px;
+        }
+    </style>
+</head>
+<body>
+<div layout:fragment="content">
+    <h1>登录
+    <fieldset>
+        <legend>Welcome</legend>
+        <form th:action="@{/loginSub}" method="post">
+            <div>
+                <label>用户名：</label>
+                <input name="username" placeholder="username" required>
+                <input type="hidden" name="token" th:value="${session.token}">
+            </div>
+            <div style="height: 10px"></div>
+            <div>
+                <button>登录</button>
+            </div>
+        </form>
+    </fieldset>
+</div>
+</body>
+</html>

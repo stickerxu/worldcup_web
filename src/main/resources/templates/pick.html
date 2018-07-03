@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout}"
       lang="zh-CN">
 <head>
     <meta charset="UTF-8">
@@ -44,7 +45,7 @@
     </style>
 </head>
 <body>
-<div>
+<div layout:fragment="content">
     <h1>世界杯竞猜</h1>
     <div th:class="space"></div>
     <div>

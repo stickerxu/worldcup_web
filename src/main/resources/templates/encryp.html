@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout}"
       lang="zh-CN">
 <head>
     <meta charset="UTF-8">
     <title>我要加密</title>
-    <script th:src="@{/js/jquery-3.2.1.min.js}"></script>
     <style>
         ul {
             list-style-type: none;
@@ -21,6 +21,11 @@
             background-color: greenyellow;
             cursor: pointer;
         }
+        form select {
+            text-align: center;
+            width: 40px;
+            height: 22px;
+        }
     </style>
     <script>
         $(function () {
@@ -31,12 +36,17 @@
     </script>
 </head>
 <body>
-<div>
+<div layout:fragment="content">
     <h1>我要加密</h1>
     <div>
         <form th:action="@{/encrypSub}" method="post">
             <div>
                 加密内容：<input name="encryp_content" th:class="text-lg" th:value="${encryp_content}" required>
+                盐加密：
+                <select name="is_salt">
+                    <option value="0" th:selected="${is_salt == 0}">否</option>
+                    <option value="1" th:selected="${is_salt == 1}">是</option>
+                </select>
             </div>
             <div>
                 加密方法：
@@ -79,6 +89,7 @@
             <button>确定</button>
         </form>
     </div>
+    <div style="height: 50px"></div>
 </div>
 </body>
 </html>

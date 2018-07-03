@@ -52,7 +52,7 @@ public class EncrptionUtil {
         return result.toString();
     }
 
-    private static String generateSalt(int number) {
+    public static String generateSalt(int number) {
         StringBuilder sb = new StringBuilder();
         SecureRandom sr = new SecureRandom();
         for (int i = 0; i < number; i++) {
