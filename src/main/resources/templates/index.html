@@ -5,15 +5,20 @@
 <head>
     <meta charset="UTF-8">
     <title>首页</title>
+    <style>
+        ul {
+            list-style-type: circle;
+        }
+        ul > li > a {
+            text-decoration-line: none;
+        }
+    </style>
 </head>
 <body>
 <div layout:fragment="content">
-    <h1>首页</h1>
-    <div>
-        <p>
-            <a th:href="@{/login}">登录</a>
-        </p>
-    </div>
+    <div class="ht-1"></div>
+    <div class="ht-1"></div>
+    <h2>首页</h2>
     <div>
         <ul>
             <li>
@@ -22,9 +27,12 @@
             <li>
                 <a th:href="@{/encryp}">我要加密</a>
             </li>
+            <li>
+                <a th:href="@{/charConvert}">汉字转拼音</a>
+            </li>
         </ul>
     </div>
-    <div style="height: 500px"></div>
+    <div style="height: 1000px"></div>
 </div>
 </body>
 </html>

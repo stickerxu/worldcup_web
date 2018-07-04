@@ -7,6 +7,7 @@
     <title>登录</title>
     <style>
         fieldset {
+            font-size: x-large;
             text-align: center;
             width: 350px;
         }
@@ -20,7 +21,8 @@
 </head>
 <body>
 <div layout:fragment="content">
-    <h1>登录
+    <div class="ht-1"></div>
+    <h2>登录</h2>
     <fieldset>
         <legend>Welcome</legend>
         <form th:action="@{/loginSub}" method="post">
@@ -35,6 +37,7 @@
             </div>
         </form>
     </fieldset>
+    <div style="height: 400px"></div>
 </div>
 </body>
 </html>
