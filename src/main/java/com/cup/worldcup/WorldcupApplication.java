@@ -6,7 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
-@MapperScan(basePackages = "com.cup.worldcup.mapper")
+@MapperScan(basePackages = {"com.cup.worldcup.mapper"})
 public class WorldcupApplication {
 
     public static void main(String[] args) {

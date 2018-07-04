@@ -1,9 +1,9 @@
-package com.cup.worldcup.controller;
+package com.cup.worldcup.controller.loginuser;
 
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -15,13 +15,13 @@ import java.io.IOException;
 import java.util.UUID;
 
 @Controller
+@Slf4j
 public class LoginController {
-    private final Logger logger = LoggerFactory.getLogger(LoginController.class);
     @GetMapping("/login")
     public String login(HttpServletRequest request) {
         String token = UUID.randomUUID().toString();
         request.getSession().setAttribute("token",token);
-        return "login";
+        return "loginuser/login";
     }
 
     @PostMapping("/loginSub")
@@ -38,9 +38,9 @@ public class LoginController {
             response.getWriter().write("<script>alert('登录成功！')</script>");
             return "index";
         } catch (IOException e) {
-            logger.error(e.getMessage(),e);
+            log.error(e.getMessage(),e);
         } catch (InterruptedException e) {
-            logger.error(e.getMessage(),e);
+            log.error(e.getMessage(),e);
         }
         return null;
     }

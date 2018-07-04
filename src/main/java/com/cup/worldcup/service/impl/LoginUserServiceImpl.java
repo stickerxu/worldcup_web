@@ -3,13 +3,16 @@ package com.cup.worldcup.service.impl;
 import com.cup.worldcup.entity.LoginUser;
 import com.cup.worldcup.mapper.LoginUserMapper;
 import com.cup.worldcup.service.LoginUserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
 public class LoginUserServiceImpl implements LoginUserService {
+    @Autowired
     private LoginUserMapper loginUserMapper;
+
     @Override
     public void insertLoginUser(LoginUser loginUser) {
         loginUserMapper.insertLoginUser(loginUser);

@@ -8,6 +8,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class EncrptionUtil {
+    public static final String MD5_32_BIT = "thirtytwobit";
+    public static final String MD5_32_BIT_UPCASE = "thirtytwobitupcase";
+    public static final String MD5_16_BIT = "sixteenbit";
+    public static final String MD5_16_BIT_UPCASE = "sixteenbitupcase";
     //MD5 返回4种加密结果
     public static Map<String, String> md5(String message) throws NoSuchAlgorithmException, UnsupportedEncodingException {
         if (isblank(message)) {
@@ -15,10 +19,10 @@ public class EncrptionUtil {
         }
         Map<String, String> map = new HashMap<>();
         String result = encrypt(message, "MD5");
-        map.put("tt", result);
-        map.put("ttU", result.toUpperCase());
-        map.put("s", result.substring(8,24));
-        map.put("sU", result.substring(8,24).toUpperCase());
+        map.put(MD5_32_BIT, result);
+        map.put(MD5_32_BIT_UPCASE, result.toUpperCase());
+        map.put(MD5_16_BIT, result.substring(8,24));
+        map.put(MD5_16_BIT_UPCASE, result.substring(8,24).toUpperCase());
         return map;
     }
 
