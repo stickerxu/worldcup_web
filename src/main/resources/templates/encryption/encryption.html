@@ -68,19 +68,19 @@
                 <div th:if="${encryp_method == 'md5' && result != null}">
                     <dl>
                         <dt>32位小写：</dt>
-                        <dd th:text="${result == null ? '' : result.tt}"></dd>
+                        <dd th:text="${result == null ? '' : result.thirtytwobit}"></dd>
                     </dl>
                     <dl>
                         <dt>32位大写：</dt>
-                        <dd th:text="${result == null ? '' : result.ttU}"></dd>
+                        <dd th:text="${result == null ? '' : result.thirtytwobitupcase}"></dd>
                     </dl>
                     <dl>
                         <dt>16位小写：</dt>
-                        <dd th:text="${result == null ? '' : result.s}"></dd>
+                        <dd th:text="${result == null ? '' : result.sixteenbit}"></dd>
                     </dl>
                     <dl>
                         <dt>16位小写：</dt>
-                        <dd th:text="${result == null ? '' : result.sU}"></dd>
+                        <dd th:text="${result == null ? '' : result.sixteenbitupcase}"></dd>
                     </dl>
                 </div>
                 <div th:if="${encryp_method == 'sha1' || encryp_method == 'sha2'}">

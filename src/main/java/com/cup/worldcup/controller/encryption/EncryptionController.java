@@ -1,6 +1,7 @@
-package com.cup.worldcup.controller;
+package com.cup.worldcup.controller.encryption;
 
 import com.cup.worldcup.util.EncrptionUtil;
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -12,16 +13,15 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
-import java.util.Map;
 
 @Controller
+@Slf4j
 public class EncryptionController {
-    private final Logger logger = LoggerFactory.getLogger(EncryptionController.class);
     @GetMapping("/encryp")
     public String encryp(Model model) {
         model.addAttribute("encryp_method", "md5");
         model.addAttribute("is_salt", 0);
-        return "encryp";
+        return "encryption/encryption";
     }
 
     @PostMapping("/encrypSub")
@@ -40,11 +40,11 @@ public class EncryptionController {
                 case "sha2": modelMap.put("result", EncrptionUtil.sha256(encryp_content));break;
                 default:break;
             }
-            return "encryp";
+            return "encryption/encryption";
         } catch (NoSuchAlgorithmException e) {
-            logger.error(e.getMessage(),e);
+            log.error(e.getMessage(),e);
         } catch (UnsupportedEncodingException e) {
-            logger.error(e.getMessage(),e);
+            log.error(e.getMessage(),e);
         }
         return null;
     }
