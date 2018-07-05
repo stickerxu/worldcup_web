@@ -1,3 +1,3 @@
 # worldcup
-home0702
-company0705
+- home0702
+- company0705
