@@ -7,4 +7,8 @@
         insert into login_user(username, password, user_email, user_phone, invest_code, registry_time)
         values (#{username}, #{password}, #{user_email}, #{user_phone}, #{invest_code}, now())
     </insert>
+
+    <select id="getUserByUsername" parameterType="String" resultType="LoginUser">
+        select * from login_user where username = #{1}
+    </select>
 </mapper>

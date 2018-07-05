@@ -17,6 +17,18 @@
         fieldset button {
             width: 80px;
         }
+        fieldset form > table {
+            margin: auto;
+        }
+        #forget-pass {
+            font-size: 14px;
+            text-decoration-line: none;
+        }
+        #login-message {
+            color: red;
+            font-size: 16px;
+            font-weight: bold;
+        }
     </style>
 </head>
 <body>
@@ -26,18 +38,38 @@
     <fieldset>
         <legend>Welcome</legend>
         <form th:action="@{/loginSub}" method="post">
-            <div>
-                <label>用户名：</label>
-                <input name="username" placeholder="username" required>
-                <input type="hidden" name="token" th:value="${session.token}">
-            </div>
+            <p id="login-message" th:text="${message == null ? '' : message}"></p>
+            <table>
+                <tr>
+                    <td>
+                        <label>用户名：</label>
+                    </td>
+                    <td>
+                        <input name="username" placeholder="username" required>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label>密码：</label>
+                    </td>
+                    <td>
+                        <input type="password" name="password" placeholder="password" required>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <a id="forget-pass" th:href="@{#}">忘记密码？</a>
+                    </td>
+                </tr>
+            </table>
+            <input type="hidden" name="token" th:value="${session.token}">
             <div style="height: 10px"></div>
             <div>
                 <button>登录</button>
             </div>
         </form>
     </fieldset>
-    <div style="height: 400px"></div>
+    <div style="height: 350px"></div>
 </div>
 </body>
 </html>

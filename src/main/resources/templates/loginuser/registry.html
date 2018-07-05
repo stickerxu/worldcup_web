@@ -11,7 +11,42 @@
             -webkit-appearance: none !important;
             margin: 0;
         }
+        #verifyText {
+            display: none;
+            color: red;
+            font-size: small;
+            font-weight: bold;
+        }
+        #verifyResult {
+            display: none;
+            font-size: small;
+            font-weight: bold;
+        }
     </style>
+    <script>
+        $(function () {
+            //异步校验用户名重复
+            $('input[name=username]').blur(function () {
+                var username = $(this).val();
+                if (username != '') {
+                    $('#verifyText').show();
+                    $.post("/registry/verify", {username:$(this).val()},verifyCallback);
+                }
+            });
+            function verifyCallback(data) {
+                if (data == 1) {
+                    $('#verifyText').hide();
+                    $('#verifyResult').text("✔用户名可用");
+                    $('#verifyResult').css("color", "green");
+                } else {
+                    $('#verifyText').hide();
+                    $('#verifyResult').text("✘用户名已存在");
+                    $('#verifyResult').css("color", "red");
+                }
+                $('#verifyResult').show();
+            }
+        })
+    </script>
 </head>
 <body>
 <div layout:fragment="content">
@@ -24,6 +59,8 @@
                     <td>用户名：</td>
                     <td>
                         <input name="username" minlength="2" required>
+                        <span id="verifyText">检测中...</span>
+                        <span id="verifyResult"></span>
                     </td>
                 </tr>
                 <tr>
