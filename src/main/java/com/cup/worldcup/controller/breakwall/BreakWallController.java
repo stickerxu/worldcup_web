@@ -41,7 +41,7 @@ public class BreakWallController {
         }
         //去邀请码表中查询有效邀请码
         request.getSession().removeAttribute("verifyCodeMsg");
-        return "/breakwall/verify_success";
+        return "breakwall/verify_success";
     }
 
     @GetMapping("/breakwall/myCode")
