@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout}"
+      lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>出错啦~！</title>
+    <style>
+        p {
+            font-size: 18px;
+            font-weight: bold;
+            color: red;
+        }
+    </style>
+</head>
+<body>
+<div layout:fragment="content">
+    <div class="ht-1"></div>
+    <h2>出错啦~！</h2>
+    <p th:text="${message == null ? '' : message}"></p>
+</div>
+</body>
+</html>

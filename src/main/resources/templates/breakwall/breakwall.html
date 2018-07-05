@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout}"
+      lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>我要翻墙</title>
+    <style>
+        #break-form {
+            margin-left: 50px;
+        }
+        #break-form dt {
+            font-size: 18px;
+            font-weight: bold;
+            padding-bottom: 10px;
+        }
+        #break-form dd > input {
+            width: 300px;
+            height: 28px;
+        }
+        #break-form dd > div {
+            color: red;
+            font-weight: bold;
+        }
+        #break-form dd > button {
+            margin-left: 10px;
+            width: 5em;
+            height: 2.5em;
+            border-radius: 0.5em;
+            border-width: 1px;
+            background-color: darkgreen;
+            color: white;
+            font-weight: bold;
+            font-size: 14px;
+            letter-spacing: 6px;
+            outline: none;
+        }
+        #break-form dd > a,
+        #break-form dd > span {
+            text-decoration-line: none;
+            margin-left: 1em;
+            position: relative;
+            top: 8px;
+        }
+    </style>
+</head>
+<body>
+<div layout:fragment="content">
+    <div class="ht-1"></div>
+    <h2>我要翻墙</h2>
+    <div>
+        <form id="break-form" th:action="@{/breakwall/verifyCode}" method="post">
+            <dl>
+                <dt>邀请码：</dt>
+                <dd>
+                    <div th:text="${session.verifyCodeMsg == null ? '' : session.verifyCodeMsg}"></div>
+                    <input name="invest_code" placeholder="&nbsp;请输入16位邀请码" maxlength="16" minlength="16" required>
+                    <button>确定</button>
+                    <a th:if="${session.user != null}" th:href="@{/breakwall/myCode}">我的邀请码>></a>
+                    <span th:if="${session.user != null}" th:text="${myCodeMsg == null ? '' : myCodeMsg}"></span>
+                </dd>
+            </dl>
+        </form>
+    </div>
+    <div style="height: 500px"></div>
+</div>
+</body>
+</html>

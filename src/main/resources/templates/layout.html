@@ -6,11 +6,13 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="widli=device-widli, initial-scale=1">
-    <link rel="icon" th:href="@{/img/icon/lakers-icon.jpg(v='20180704')}">
+    <link rel="apple-touch-icon" href="/img/icon/lakers-icon.ico?v=20180706">
+    <link rel="shortcut icon" href="/img/icon/lakers-icon.ico?v=20180706">
+    <link rel="icon" href="/img/icon/lakers-icon.ico?v=20180706">
     <title>WorldCup2018</title>
     <!--<link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">-->
     <script th:src="@{/js/jquery-3.2.1.min.js}"></script>
-    <script th:src="@{/js/bootstrap.min.js}"></script>
+    <!--<script th:src="@{js/bootstrap.min.js}"></script>-->
     <style>
         body {
             margin-left: 40px;
@@ -47,6 +49,11 @@
             text-decoration-line: none;
             padding: 4px;
         }
+        .ul-nav li > span {
+            color: white;
+            font-size: 18px;
+            font-weight: bold;
+        }
         .ul-nav li:last-child {
             float: right;
         }
@@ -78,10 +85,13 @@
             <a href="http://gogs.stickerxu.top/" target="_blank">代码管理</a>
         </li>
         <li>
-            <a href="https://ssr.wannacorn.com/" target="_blank">我要翻墙</a>
+            <a th:href="@{/breakwall}">我要翻墙</a>
         </li>
-        <li>
+        <li th:if="${session.user == null}">
             <a th:href="@{/login}">登录</a><a th:href="@{/registry}">注册</a>
+        </li>
+        <li th:if="${session.user != null}">
+            <span>你好，</span><a th:href="@{#}"> <span th:text="${session.user.username}"></span></a><a th:href="@{/logout}">退出</a>
         </li>
     </ul>
 </div>
