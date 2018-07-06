@@ -20,6 +20,10 @@
         }
         footer {
             text-align: center;
+            position: fixed;
+            bottom: 1em;
+            left: 0;
+            right: 0;
         }
         .cup-nav {
             position: fixed;
@@ -91,12 +95,12 @@
             <a th:href="@{/login}">登录</a><a th:href="@{/registry}">注册</a>
         </li>
         <li th:if="${session.user != null}">
-            <span>你好，</span><a th:href="@{#}"> <span th:text="${session.user.username}"></span></a><a th:href="@{/logout}">退出</a>
+            <span>你好，</span><a th:href="@{/user/info}"> <span th:text="${session.user.username}"></span></a><a th:href="@{/logout}">退出</a>
         </li>
     </ul>
 </div>
 <div layout:fragment="content" class="f-clear"></div>
-<footer>
+<footer class="f-clear">
     &copy; 2018 - 2019 WorldCup2018
 </footer>
 </body>

@@ -58,18 +58,17 @@
                 </tr>
                 <tr>
                     <td colspan="2">
-                        <a id="forget-pass" th:href="@{#}">忘记密码？</a>
+                        <a id="forget-pass" th:href="@{/login/findPass}">忘记密码？</a>
                     </td>
                 </tr>
             </table>
             <input type="hidden" name="token" th:value="${session.token}">
-            <div style="height: 10px"></div>
+            <div class="ht-1"></div>
             <div>
                 <button>登录</button>
             </div>
         </form>
     </fieldset>
-    <div style="height: 350px"></div>
 </div>
 </body>
 </html>

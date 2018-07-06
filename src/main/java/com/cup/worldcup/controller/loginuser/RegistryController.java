@@ -43,12 +43,14 @@ public class RegistryController {
             }
             loginUser.setInvest_code(EncrptionUtil.md5(String.valueOf(EncrptionUtil.generateSalt(6))).get(EncrptionUtil.MD5_16_BIT_UPCASE));
             loginUserService.insertLoginUser(loginUser);
+            model.addAttribute("user", loginUser);
+            return "loginuser/registry_success";
         } catch (NoSuchAlgorithmException e) {
             log.error(e.getMessage(),e);
         } catch (UnsupportedEncodingException e) {
             log.error(e.getMessage(),e);
         }
-        return "redirect:/login";
+        return null;
     }
 
     @PostMapping("/registry/verify")

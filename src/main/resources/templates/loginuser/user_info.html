@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout}"
+      lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>个人资料</title>
+    <style>
+        table {
+            margin-left: 20px;
+        }
+        table th,
+        table td {
+            padding-bottom: 1em;
+        }
+    </style>
+</head>
+<body>
+<div layout:fragment="content">
+<div class="ht-1"></div>
+    <h2>个人资料</h2>
+    <div th:if="${session.user != null}">
+        <table>
+            <tr>
+                <th colspan="2">基本资料</th>
+            </tr>
+            <tr>
+                <td>用户名：</td>
+                <td th:text="${session.user.username}"></td>
+            </tr>
+            <tr>
+                <td>邮箱：</td>
+                <td th:text="${session.user.user_email}"></td>
+            </tr>
+            <tr>
+                <td>手机：</td>
+                <td th:text="${session.user.user_phone}"></td>
+            </tr>
+            <tr>
+                <td>邀请码：</td>
+                <td th:text="${session.user.invest_code}"></td>
+            </tr>
+            <tr>
+                <th colspan="2">安全设置</th>
+            </tr>
+            <tr>
+                <td>
+                    <a th:href="@{/user/updatePass}">修改密码</a>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+</body>
+</html>

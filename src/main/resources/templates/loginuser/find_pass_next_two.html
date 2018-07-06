@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout}"
+      lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>找回密码</title>
+    <script>
+        $(function () {
+            $('#findpass-form').submit(function () {
+                var pass = $('input[name=password]').val();
+                var repass = $('input[name=repassword]').val();
+                if (pass != repass) {
+                    $(this).before("<p style='color: red; font-weight: bold'>两次输入的密码不一致！</p>")
+                    return false;
+                }
+            })
+        })
+    </script>
+</head>
+<body>
+<div layout:fragment="content">
+    <div class="ht-1"></div>
+    <h2>找回密码</h2>
+    <div>
+        <form id="findpass-form" th:action="@{/login/findPassSub}" method="post">
+            <dl>
+                <dt>请输入新密码：</dt>
+                <dd>
+                    <input type="password" name="password" minlength="6" required>
+                </dd>
+            </dl>
+            <dl>
+                <dt>请再次输入密码：</dt>
+                <dd>
+                    <input type="password" name="repassword" minlength="6" required>
+                </dd>
+            </dl>
+            <button>提交</button>
+        </form>
+    </div>
+</div>
+</body>
+</html>

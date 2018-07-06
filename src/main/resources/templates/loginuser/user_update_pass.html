@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout}"
+      lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>修改密码</title>
+    <style>
+        table th,
+        table td {
+            padding-bottom: 1em;
+        }
+        table tr:last-child > td {
+            text-align: right;
+        }
+    </style>
+</head>
+<body>
+<div layout:fragment="content">
+    <div class="ht-1"></div>
+    <h2>修改密码</h2>
+    <div>
+        <form th:action="@{//user/updatePassSub}" method="post">
+            <table>
+                <tr>
+                    <th>原密码：</th>
+                    <td>
+                        <input type="password" minlength="6" name="old_password">
+                    </td>
+                </tr>
+                <tr>
+                    <th>新密码：</th>
+                    <td>
+                        <input type="password" minlength="6" name="new_password">
+                    </td>
+                </tr>
+                <tr>
+                    <th>确认密码：</th>
+                    <td>
+                        <input type="password" minlength="6" name="renew_password">
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <button>提交</button>
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </div>
+</div>
+</body>
+</html>
