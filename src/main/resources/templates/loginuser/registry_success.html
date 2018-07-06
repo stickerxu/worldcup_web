@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout}"
+      lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>注册成功！</title>
+    <style>
+        .registry-finish-dl,
+        .next-span a {
+            margin-left: 3em;
+        }
+        .registry-finish-dl > dt {
+            padding-bottom: 10px;
+            font-size: 18px;
+            color: blue;
+        }
+        .registry-finish-dl > dd {
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .next-span a {
+            margin-top: 20px;
+            text-decoration-line: none;
+            display: block;
+            float: left;
+        }
+    </style>
+</head>
+<body>
+<div layout:fragment="content">
+    <div class="ht-1"></div>
+    <h2>注册成功！</h2>
+    <div>
+        <dl class="registry-finish-dl">
+            <dt>你的专属邀请码：</dt>
+            <dd th:text="${user == null ? 'SD6AS1D6A51DDSA' : user.invest_code}"></dd>
+        </dl>
+    </div>
+
+    <div>
+        <span class="next-span">
+            <a th:href="@{/login}">去登录>></a><a th:href="@{/breakwall}">去翻墙>></a>
+        </span>
+    </div>
+    <div style="height: 30em"></div>
+</div>
+</body>
+</html>

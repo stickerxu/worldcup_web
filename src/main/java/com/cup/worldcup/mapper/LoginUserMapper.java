@@ -12,6 +12,8 @@ public interface LoginUserMapper {
 
     public void updateLoginUserById(LoginUser loginUser);
 
+    public void updateLoginUserPasswordById(LoginUser loginUser);
+
     public LoginUser getUserByUsername(String username);
 
     public List<LoginUser> listUserByCondition(LoginUser loginUser);
