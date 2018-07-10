@@ -14,30 +14,47 @@
             text-align: right;
         }
     </style>
+    <script>
+        $(function () {
+            $('#updatePassForm').submit(function () {
+                var old_password = $('#old_password').val();
+                var new_password = $('#new_password').val();
+                var renew_password = $('#renew_password').val();
+                if (new_password != renew_password) {
+                    alert("新密码两次输入不一致！");
+                    return false;
+                }
+                if (old_password == new_password) {
+                    alert("新密码不能与原密码一致！");
+                    return false;
+                }
+            });
+        })
+    </script>
 </head>
 <body>
 <div layout:fragment="content">
     <div class="ht-1"></div>
     <h2>修改密码</h2>
     <div>
-        <form th:action="@{//user/updatePassSub}" method="post">
+        <form id="updatePassForm" th:action="@{/user/updatePassSub}" method="post">
             <table>
                 <tr>
                     <th>原密码：</th>
                     <td>
-                        <input type="password" minlength="6" name="old_password">
+                        <input type="password" minlength="6" name="old_password" required>
                     </td>
                 </tr>
                 <tr>
                     <th>新密码：</th>
                     <td>
-                        <input type="password" minlength="6" name="new_password">
+                        <input type="password" minlength="6" name="new_password" required>
                     </td>
                 </tr>
                 <tr>
                     <th>确认密码：</th>
                     <td>
-                        <input type="password" minlength="6" name="renew_password">
+                        <input type="password" minlength="6" name="renew_password" required>
                     </td>
                 </tr>
                 <tr>
