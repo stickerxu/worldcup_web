@@ -20,16 +20,24 @@
         fieldset form > table {
             margin: auto;
         }
-        #forget-pass {
+        #forgetPass {
             font-size: 14px;
             text-decoration-line: none;
         }
-        #login-message {
+        #loginMessage {
             color: red;
             font-size: 16px;
             font-weight: bold;
         }
     </style>
+    <script>
+        //点击登录，按钮失效
+        $(function () {
+            $('#loginForm').submit(function () {
+                $('#loginButton').prop("disabled", true);
+            });
+        })
+    </script>
 </head>
 <body>
 <div layout:fragment="content">
@@ -37,8 +45,8 @@
     <h2>登录</h2>
     <fieldset>
         <legend>Welcome</legend>
-        <form th:action="@{/loginSub}" method="post">
-            <p id="login-message" th:text="${message == null ? '' : message}"></p>
+        <form id="loginForm" th:action="@{/loginSub}" method="post">
+            <p id="loginMessage" th:text="${message == null ? '' : message}"></p>
             <table>
                 <tr>
                     <td>
@@ -58,14 +66,14 @@
                 </tr>
                 <tr>
                     <td colspan="2">
-                        <a id="forget-pass" th:href="@{/login/findPass}">忘记密码？</a>
+                        <a id="forgetPass" th:href="@{/login/findPass}">忘记密码？</a>
                     </td>
                 </tr>
             </table>
-            <input type="hidden" name="token" th:value="${session.token}">
+            <!--<input type="hidden" name="token" th:value="${session.token}">-->
             <div class="ht-1"></div>
             <div>
-                <button>登录</button>
+                <button id="loginButton">登录</button>
             </div>
         </form>
     </fieldset>
