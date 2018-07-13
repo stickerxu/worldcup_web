@@ -29,25 +29,17 @@ public class WorldcupApplication {
         private MethonInterceptor methonInterceptor;
 
         @Override
-        public void addResourceHandlers(ResourceHandlerRegistry registry) {
-            registry.addResourceHandler("/static/**").addResourceLocations("/static/");
-        }
-
-        @Override
         public void addInterceptors(InterceptorRegistry registry) {
             registry.addInterceptor(methonInterceptor).addPathPatterns("/**").excludePathPatterns(excludePath());
         }
         private List<String> excludePath() {
             List<String> list = new ArrayList<>();
+            list.add("/static/**");
             list.add("/");
             list.add("/login");
             list.add("/registry");
             list.add("/loginSub");
-            list.add("/login/findPass");
-            list.add("/login/findPassNext");
-            list.add("/login/findPassNextTwo");
-            list.add("/login/findPassSub");
-            list.add("/img/icon/lakers-icon.ico");
+            list.add("/login/find*");
             return list;
         }
     }

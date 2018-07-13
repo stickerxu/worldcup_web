@@ -6,13 +6,13 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="widli=device-widli, initial-scale=1">
-    <link rel="apple-touch-icon" href="/img/icon/lakers-icon.ico?v=20180706">
-    <link rel="shortcut icon" href="/img/icon/lakers-icon.ico?v=20180706">
-    <link rel="icon" href="/img/icon/lakers-icon.ico?v=20180706">
+    <link rel="apple-touch-icon" href="/static/img/icon/lakers-icon.ico?v=20180706">
+    <link rel="shortcut icon" href="/static/img/icon/lakers-icon.ico?v=20180706">
+    <link rel="icon" href="/static/img/icon/lakers-icon.ico?v=20180706">
     <title>WorldCup2018</title>
-    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
-    <script th:src="@{/js/jquery-3.2.1.min.js}"></script>
-    <script th:src="@{js/bootstrap.min.js}"></script>
+    <link rel="stylesheet" th:href="@{/static/css/bootstrap.min.css}">
+    <script th:src="@{/static/js/jquery-3.2.1.min.js}"></script>
+    <script th:src="@{/static/js/bootstrap.min.js}"></script>
     <style>
         body {
             margin-left: 40px;
@@ -33,7 +33,7 @@
         }
         .ul-nav {
             width: 100%;
-            height: 32px;
+            height: 34.4px;
             background-color: darkgray;
             list-style-type:none;
             margin:0;
@@ -68,15 +68,6 @@
         .ul-nav li > a:hover,.ul-nav li > a:active {
             background-color: orange;
         }
-        .f-clear {
-            clear: both;
-        }
-        .ht-1 {
-            height: 10px;
-        }
-        .wt-1 {
-            width: 10px;
-        }
     </style>
 </head>
 <body>
@@ -99,8 +90,8 @@
         </li>
     </ul>
 </div>
-<div layout:fragment="content" class="f-clear"></div>
-<footer class="f-clear">
+<div layout:fragment="content" class="clearfix mt-5"></div>
+<footer class="clearfix">
     &copy; 2018 - 2019 WorldCup2018
 </footer>
 </body>
