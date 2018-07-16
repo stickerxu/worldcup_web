@@ -36,10 +36,10 @@ public class WorldcupApplication {
             List<String> list = new ArrayList<>();
             list.add("/static/**");
             list.add("/");
-            list.add("/login");
-            list.add("/registry");
-            list.add("/loginSub");
-            list.add("/login/find*");
+            list.add("/registry*");
+            list.add("/registry/**");
+            list.add("/login*");
+            list.add("/login/**");
             return list;
         }
     }
