@@ -6,43 +6,24 @@
     <meta charset="UTF-8">
     <title>注册成功！</title>
     <style>
-        .registry-finish-dl,
-        .next-span a {
-            margin-left: 3em;
-        }
-        .registry-finish-dl > dt {
-            padding-bottom: 10px;
-            font-size: 18px;
-            color: blue;
-        }
-        .registry-finish-dl > dd {
-            font-size: 24px;
-            font-weight: bold;
-        }
-        .next-span a {
-            margin-top: 20px;
-            text-decoration-line: none;
-            display: block;
-            float: left;
+        body {
+            margin: 0;
+            padding: 0;
         }
     </style>
 </head>
 <body>
 <div layout:fragment="content">
-    <h2>注册成功！</h2>
-    <div>
-        <dl class="registry-finish-dl">
-            <dt>你的专属邀请码：</dt>
-            <dd th:text="${user == null ? 'SD6AS1D6A51DDSA' : user.invest_code}"></dd>
-        </dl>
+    <div class="jumbotron">
+        <h1 class="display-4">注册成功！</h1>
+        <p class="lead">你可以点击右上角用户名修改和完善你的用户信息。</p>
+        <hr class="my-4">
+        <p th:text="${'你的专属邀请码：'+user.invest_code}"></p>
+        <p class="lead">
+            <a class="btn btn-primary" th:href="@{/login}" role="button">去登录>></a>
+            <a class="btn btn-primary" th:href="@{/breakwall}" role="button">去翻墙>></a>
+        </p>
     </div>
-
-    <div>
-        <span class="next-span">
-            <a th:href="@{/login}">去登录>></a><a th:href="@{/breakwall}">去翻墙>></a>
-        </span>
-    </div>
-    <div style="height: 30em"></div>
 </div>
 </body>
 </html>
