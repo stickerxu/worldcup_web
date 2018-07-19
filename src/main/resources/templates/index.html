@@ -6,28 +6,58 @@
     <meta charset="UTF-8">
     <title>首页</title>
     <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
         ul {
             list-style-type: circle;
         }
         ul > li > a {
             text-decoration-line: none;
         }
+        .carousel-item {
+            height: 32rem;
+            background-color: darkgray;
+        }
+        .carousel-item img {
+            height: 32rem;
+            margin: auto;
+        }
     </style>
 </head>
 <body>
-<div layout:fragment="content">    <h2>首页</h2>
-    <div>
-        <ul>
-            <li>
-                <a th:href="@{/pick}">2018世界杯</a>
-            </li>
-            <li>
-                <a th:href="@{/encryp}">我要加密</a>
-            </li>
-            <li>
-                <a th:href="@{/charConvert}">汉字转拼音</a>
-            </li>
-        </ul>
+<div layout:fragment="content">
+    <div id="indexTopSlide" class="carousel slide" data-ride="carousel">
+        <ol class="carousel-indicators">
+            <li data-target="#indexTopSlide" data-slide-to="0" class="active"></li>
+            <li data-target="#indexTopSlide" data-slide-to="1"></li>
+            <li data-target="#indexTopSlide" data-slide-to="2"></li>
+        </ol>
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img class="d-block" src="https://www.wannacorn.com/static/img/slide/slide_0.jpg?v=1" alt="0">
+                <div class="carousel-caption d-none d-md-block">
+                    <h5>世界杯决赛 4-2 法国夺冠！</h5>
+                    <p>北京时间2018年7月15日，法国队在世界杯决赛中4比2击败克罗地亚夺冠！</p>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <img class="d-block w-75" src="https://www.wannacorn.com/static/img/slide/slide_1.jpg" alt="1">
+                <div class="carousel-caption d-none d-md-block">
+                    <h5>The King Is Arrived</h5>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <img class="d-block" src="https://www.wannacorn.com/static/img/slide/slide_2.jpg" alt="2">
+            </div>
+        </div>
+        <a class="carousel-control-prev" href="#indexTopSlide" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        </a>
+        <a class="carousel-control-next" href="#indexTopSlide" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        </a>
     </div>
 </div>
 </body>

@@ -22,19 +22,6 @@
             color: red;
             font-weight: bold;
         }
-        #break-form dd > button {
-            margin-left: 10px;
-            width: 5em;
-            height: 2.5em;
-            border-radius: 0.5em;
-            border-width: 1px;
-            background-color: darkgreen;
-            color: white;
-            font-weight: bold;
-            font-size: 14px;
-            letter-spacing: 6px;
-            outline: none;
-        }
         #break-form dd > a,
         #break-form dd > span {
             text-decoration-line: none;
@@ -54,7 +41,7 @@
                 <dd>
                     <div th:text="${session.verifyCodeMsg == null ? '' : session.verifyCodeMsg}"></div>
                     <input name="invest_code" placeholder="&nbsp;请输入16位邀请码" maxlength="16" minlength="16" required>
-                    <button>确定</button>
+                    <button class="btn-secondary">确定</button>
                     <a th:if="${session.user != null}" th:href="@{/breakwall/myCode}">我的邀请码>></a>
                     <span th:if="${session.user != null}" th:text="${myCodeMsg == null ? '' : myCodeMsg}"></span>
                 </dd>
