@@ -34,6 +34,7 @@ public class WorldcupApplication {
         }
         private List<String> excludePath() {
             List<String> list = new ArrayList<>();
+            list.add("/webjars/**");
             list.add("/static/**");
             list.add("/");
             list.add("/registry*");

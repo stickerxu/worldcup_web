@@ -6,8 +6,14 @@
     <meta charset="UTF-8">
     <title>注册</title>
     <style>
-        .table-reg input::-webkit-outer-spin-button,
-        .table-reg input::-webkit-inner-spin-button{
+        #registryForm {
+            width: 350px;
+            position: absolute;
+            top: 16rem;
+            left: 50.5rem;
+        }
+        #user_phone input::-webkit-outer-spin-button,
+        #user_phone input::-webkit-inner-spin-button{
             -webkit-appearance: none !important;
             margin: 0;
         }
@@ -50,38 +56,38 @@
 </head>
 <body>
 <div layout:fragment="content">
-    <h2>注册</h2>
-    <div>
+    <div id="registryForm">
         <form th:action="@{/registrySub}" method="post">
-            <table th:class="table-reg">
-                <tr>
-                    <td>用户名：</td>
-                    <td>
-                        <input name="username" minlength="2" required>
-                        <span id="verifyText">检测中...</span>
-                        <span id="verifyResult"></span>
-                    </td>
-                </tr>
-                <tr>
-                    <td>密码：</td>
-                    <td>
-                        <input type="password" name="password" minlength="6" required>
-                    </td>
-                </tr>
-                <tr>
-                    <td>邮箱：</td>
-                    <td>
-                        <input type="email" name="user_email" required>
-                    </td>
-                </tr>
-                <tr>
-                    <td>手机号：</td>
-                    <td>
-                        <input type="number"  name="user_phone" minlength="8" required>
-                    </td>
-                </tr>
-            </table>
-            <button>注册</button>
+            <div class="form-group text-center">
+                <h4>请注册</h4>
+            </div>
+            <div class="form-group row">
+                <label for="username" class="col-sm-3 col-form-label">用户名</label>
+                <div class="col-sm-9">
+                    <input class="form-control"  id="username" name="username" minlength="2" required>
+                    <span id="verifyText">检测中...</span>
+                    <span id="verifyResult"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="password" class="col-sm-3 col-form-label">密码</label>
+                <div class="col-sm-9">
+                    <input class="form-control"  id="password" name="password" minlength="6" required>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="user_email" class="col-sm-3 col-form-label">邮箱</label>
+                <div class="col-sm-9">
+                    <input class="form-control"  type="email" id="user_email" name="user_email" required>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="user_phone" class="col-sm-3 col-form-label">手机号</label>
+                <div class="col-sm-9">
+                    <input class="form-control"  type="number" id="user_phone" name="user_phone" minlength="8" required>
+                </div>
+            </div>
+            <button class="btn btn-primary btn-block">立即注册</button>
         </form>
     </div>
 </div>

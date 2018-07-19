@@ -7,26 +7,18 @@
     <title>登录</title>
     <style>
         fieldset {
-            font-size: x-large;
+            width: 300px;
             text-align: center;
-            width: 350px;
-        }
-        fieldset label {
-            font-size: medium;
-        }
-        fieldset button {
-            width: 80px;
-        }
-        fieldset form > table {
-            margin: auto;
+            position: absolute;
+            top: 16rem;
+            left: 50.5rem;
         }
         #forgetPass {
-            font-size: 14px;
+            font-size: 0.875em;
             text-decoration-line: none;
         }
         #loginMessage {
             color: red;
-            font-size: 16px;
             font-weight: bold;
         }
     </style>
@@ -41,39 +33,18 @@
 </head>
 <body>
 <div layout:fragment="content">
-    <h2>登录</h2>
     <fieldset>
-        <legend>Welcome</legend>
+        <legend>请登录</legend>
         <form id="loginForm" th:action="@{/loginSub}" method="post">
-            <p id="loginMessage" th:text="${message == null ? '' : message}"></p>
-            <table>
-                <tr>
-                    <td>
-                        <label>用户名：</label>
-                    </td>
-                    <td>
-                        <input name="username" placeholder="username" required>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <label>密码：</label>
-                    </td>
-                    <td>
-                        <input type="password" name="password" placeholder="password" required>
-                    </td>
-                </tr>
-                <tr>
-                    <td colspan="2">
-                        <a id="forgetPass" th:href="@{/login/findPass}">忘记密码？</a>
-                    </td>
-                </tr>
-            </table>
-            <!--<input type="hidden" name="token" th:value="${session.token}">-->
-
-            <div>
-                <button id="loginButton">登录</button>
+            <div class="form-group">
+                <p id="loginMessage" th:text="${message == null ? '' : message}"></p>
+                <input class="form-control" id="username" name="username" placeholder="请输入用户名">
             </div>
+            <div class="form-group text-right">
+                <input type="password"  class="form-control" id="password" name="password" placeholder="请输入密码">
+                <a id="forgetPass" th:href="@{/login/findPass}">忘记密码？</a>
+            </div>
+            <button class="btn btn-primary btn-block">立即登录</button>
         </form>
     </fieldset>
 </div>
