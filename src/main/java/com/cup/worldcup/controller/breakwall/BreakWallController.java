@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -45,15 +46,12 @@ public class BreakWallController {
     }
 
     @GetMapping("/breakwall/myCode")
-    public String myCode(HttpServletRequest request, Model model) {
-        String result;
+    public @ResponseBody String myCode(HttpServletRequest request) {
         LoginUser user = (LoginUser) request.getSession().getAttribute("user");
         if (user == null) {
-            result = "请登录！";
-        } else {
-            result = user.getInvest_code();
+            log.error("{} 登陆超时, 访问地址：{};", user.getUsername(), request.getRequestURI());
+            return "登陆超时！";
         }
-        model.addAttribute("myCodeMsg",result);
-        return breakwall();
+        return user.getInvest_code();
     }
 }

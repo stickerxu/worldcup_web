@@ -6,47 +6,56 @@
     <meta charset="UTF-8">
     <title>我要翻墙</title>
     <style>
-        #break-form {
-            margin-left: 50px;
-        }
-        #break-form dt {
-            font-size: 18px;
-            font-weight: bold;
-            padding-bottom: 10px;
-        }
-        #break-form dd > input {
-            width: 300px;
-            height: 28px;
-        }
-        #break-form dd > div {
-            color: red;
-            font-weight: bold;
-        }
-        #break-form dd > a,
-        #break-form dd > span {
-            text-decoration-line: none;
-            margin-left: 1em;
-            position: relative;
-            top: 8px;
+        form {
+            position: absolute;
+            width: 500px;
+            top: 7em;
         }
     </style>
+    <script>
+        $(function () {
+            $('#myCodeButton').click(function () {
+                $.get("/breakwall/myCode", myCodeButtonCallback);
+            });
+            function myCodeButtonCallback(data) {
+                $('#resultMsg').text(data);
+                $('#resultMsg').removeClass("d-none");
+
+            }
+        })
+    </script>
 </head>
 <body>
 <div layout:fragment="content">
-    <h2>我要翻墙</h2>
     <div>
-        <form id="break-form" th:action="@{/breakwall/verifyCode}" method="post">
+        <form th:action="@{/breakwall/verifyCode}" method="post">
+            <h4>邀请码</h4>
+            <strong class="text-danger" th:text="${session.verifyCodeMsg == null ? '' : session.verifyCodeMsg}"></strong>
+            <div class="form-group row">
+                <div class="col-md-8">
+                    <input class="form-control" id="invest_code" name="invest_code" maxlength="16" minlength="16" placeholder="请输入16位邀请码">
+                </div>
+                <div class="form-group col-md-2">
+                    <button type="button" id="myCodeButton" class="btn btn-outline-info">
+                        我的邀请码
+                    </button>
+                </div>
+            </div>
+            <div id="resultMsg" class="alert alert-success d-none" role="alert"></div>
+            <button class="btn btn-primary">确定</button>
+        </form>
+
+        <!--<form id="break-form">
             <dl>
                 <dt>邀请码：</dt>
                 <dd>
-                    <div th:text="${session.verifyCodeMsg == null ? '' : session.verifyCodeMsg}"></div>
+
                     <input name="invest_code" placeholder="&nbsp;请输入16位邀请码" maxlength="16" minlength="16" required>
-                    <button class="btn-secondary">确定</button>
                     <a th:if="${session.user != null}" th:href="@{/breakwall/myCode}">我的邀请码>></a>
                     <span th:if="${session.user != null}" th:text="${myCodeMsg == null ? '' : myCodeMsg}"></span>
                 </dd>
             </dl>
-        </form>
+        </form>-->
     </div>
 </div>
 </body>
