@@ -9,9 +9,8 @@
         fieldset {
             width: 300px;
             text-align: center;
-            position: absolute;
-            top: 16rem;
-            left: 50.5rem;
+            margin: auto;
+            padding-top: 200px;
         }
         #forgetPass {
             font-size: 0.875em;
@@ -34,8 +33,8 @@
 <body>
 <div layout:fragment="content">
     <fieldset>
-        <legend>请登录</legend>
         <form id="loginForm" th:action="@{/loginSub}" method="post">
+            <legend>请登录</legend>
             <div class="form-group">
                 <p id="loginMessage" th:text="${message == null ? '' : message}"></p>
                 <input class="form-control" id="username" name="username" placeholder="请输入用户名">
