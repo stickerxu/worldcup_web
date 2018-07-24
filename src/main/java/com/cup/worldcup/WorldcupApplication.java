@@ -42,13 +42,8 @@ public class WorldcupApplication {
             list.add("/registry/**");
             list.add("/login*");
             list.add("/login/**");
-            list.add("/test/**");
+            list.add("/markdown/**");
             return list;
-        }
-
-        @Override
-        public void addViewControllers(ViewControllerRegistry registry) {
-            registry.addViewController("/test").setViewName("test");
         }
     }
 }

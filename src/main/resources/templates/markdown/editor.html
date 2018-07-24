@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout}"
+      lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>Markdown Editor</title>
+    <link rel="stylesheet" href="/webjars/highlightjs/9.8.0/styles/default.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/2.10.0/github-markdown.min.css"/>
+    <script src="/webjars/jquery/3.3.1-1/jquery.min.js"></script>
+    <script src="/webjars/marked/0.3.2/marked.js"></script>
+    <script src="/webjars/highlightjs/9.8.0/highlight.min.js"></script>
+    <style>
+        .row > div {
+            border: solid;
+            padding: 0px;
+        }
+        .row > div:first-child {
+            border-right-style: none;
+        }
+        textarea {
+            height: 100%;
+            width: 100%;
+            resize: none;
+        }
+        #markdownText {
+            text-indent: 3px;
+        }
+        #preview {
+            padding: 5px;
+        }
+        #htmlcode {
+            border: none;
+        }
+    </style>
+    <script>
+        //基本设置
+        hljs.initHighlightingOnLoad();
+        var rendererMD = new marked.Renderer();
+        marked.setOptions({
+            renderer: rendererMD,
+            gfm: true,
+            tables: true,
+            breaks: false,
+            pedantic: false,
+            sanitize: false,
+            smartLists: true,
+            smartypants: false,
+            highlight: function (code) {
+                return hljs.highlightAuto(code).value;
+            }
+        });
+        $(function () {
+            $('#markdownText').on('keyup blur', function () {
+                var markdownString = $('#markdownText').val();
+                $('#preview').html(marked(markdownString));
+                $('#htmlcode').text(marked(markdownString).replace(/\sid=".*"/g,""));
+            });
+            $('#markdownText').keydown(function (e) {
+                if (e.keyCode == 9) {
+                    e.preventDefault();
+                    var indent = '    ';
+                    var start = this.selectionStart;
+                    var end = this.selectionEnd;
+                    var selected = window.getSelection().toString();
+                    selected = indent + selected.replace(/\n/g, '\n' + indent);
+                    this.value = this.value.substring(0, start) + selected + this.value.substring(end);
+                    this.setSelectionRange(start + indent.length, start + selected.length);
+                }
+            });
+
+            //HTML和Markdown预览切换
+            $('#rowThridDiv').hide();
+            $('#preview').show();
+            $('#reviewHtml').click(function () {
+                $('#preview').toggle();
+                $('#rowThridDiv').toggle();
+            });
+
+            //导出消息
+            $('#exportHtmlAlert').hide();
+            $('#exportHtml').on('mouseover mouseout',(function () {
+                $('#exportHtmlAlert').toggle();
+            }));
+        });
+    </script>
+</head>
+<body>
+<div layout:fragment="content">
+<div class="container">
+    <div class="text-center h2">Markdown Editor</div>
+    <form id="mdForm">
+        <div class="row">
+            <div class="col-sm-6 col-md-6 col-lg-6">
+            <textarea id="markdownText" rows="25" placeholder="请输入Markdown文本"></textarea>
+            </div>
+            <div id="preview" class="col-sm-6 col-md-6 col-lg-6 markdown-body bg-white"></div>
+            <div id="rowThridDiv" class="col-sm-6 col-md-6 col-lg-6">
+                <textarea id="htmlcode" name="htmlText" class="bg-transparent" rows="25" readonly></textarea>
+            </div>
+        </div>
+    </form>
+    <div class="mt-2">
+        <button id="reviewHtml" class="btn btn-primary">查看HTML代码</button>
+        <button id="exportHtml" class="btn btn-secondary" form="mdForm" formaction="/markdown/expHtml" formmethod="post">导出HTML</button>
+        <div id="exportHtmlAlert" class="alert alert-success w-50" role="alert">
+            导出后可直接在浏览器中访问或在项目中使用。
+        </div>
+    </div>
+</div>
+</div>
+</body>
+</html>
