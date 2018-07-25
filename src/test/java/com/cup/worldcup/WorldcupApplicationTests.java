@@ -2,6 +2,7 @@ package com.cup.worldcup;
 
 import com.cup.worldcup.entity.LoginUser;
 import com.cup.worldcup.service.LoginUserService;
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,4 +27,9 @@ public class WorldcupApplicationTests {
         loginUserService.insertLoginUser(loginUser);
     }
 
+    @Test
+    public void test0705() {
+        LoginUser adm = loginUserService.getUserByUsername("adm");
+        Assert.assertNull("这不是空的对象",adm);
+    }
 }

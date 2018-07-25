@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout}"
+      lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>验证成功</title>
+    <style>
+        .node-ul {
+            list-style-type: circle;
+        }
+        .node-ul li dt {
+            padding-bottom: 10px;
+        }
+        .node-ul li dd {
+            width: 500px;
+            word-break: break-word;
+        }
+        .download-dl dt {
+            margin-left: 60px;
+        }
+    </style>
+</head>
+<body>
+<div layout:fragment="content">
+    <h2>验证成功</h2>
+    <div>
+        <dl class="download-dl">
+            <dt>下载最新版本SSR：</dt>
+            <dd>
+               <ul>
+                   <li>Windows: <a href="https://www.wannacorn.cn/static/app/ssr/ssr-win.7z">ssr-win.7z</a></li>
+                   <li>Andriod: <a href="https://www.wannacorn.cn/static/app/ssr/ssr-android.apk">ssr-android.apk</a></li>
+                   <li>IOS: <a href="https://www.wannacorn.cn/static/app/ssr/ssr-mac.dmg">ssr-mac.dmg</a></li>
+               </ul>
+            </dd>
+        </dl>
+    </div>
+    <div>
+        <ul class="node-ul">
+            <li>
+                <b>日本节点1：</b>
+                <dl>
+                    <dt>ssr://连接：</dt>
+                    <dd>ssr://NDUuNzcuMTEuOTc6NTIwMTM6YXV0aF9jaGFpbl9hOm5vbmU6cGxhaW46ZDJGdWJtRmpiM0p1TG1OdmJRLz9vYmZzcGFyYW09JnJlbWFya3M9VmxSTCZncm91cD01NDZKNTdHeg</dd>
+                </dl>
+                <dl>
+                    <dt>ssr二维码：</dt>
+                    <dd>
+                        <img src="https://www.wannacorn.cn/static/img/breakwall/ssr-vtk.png" width="180px">
+                    </dd>
+                </dl>
+            </li>
+        </ul>
+
+    </div>
+</div>
+</body>
+</html>

@@ -29,6 +29,11 @@ public class LoginUserServiceImpl implements LoginUserService {
     }
 
     @Override
+    public void updateLoginUserPasswordById(LoginUser loginUser) {
+        loginUserMapper.updateLoginUserPasswordById(loginUser);
+    }
+
+    @Override
     public LoginUser getUserByUsername(String username) {
         return loginUserMapper.getUserByUsername(username);
     }
