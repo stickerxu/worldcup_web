@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout}"
+      lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>找回密码</title>
+</head>
+<body>
+<div layout:fragment="content">
+    <h2>找回密码</h2>
+    <div>
+        <p style="color: red; font-weight: bold" th:text="${session.resultMsg == null ? '' : session.resultMsg}"></p>
+        <form th:action="@{/login/findPassNextTwo}" method="post">
+            <dl>
+                <dt>请输入您的注册邮箱：</dt>
+                <dd>
+                    <input type="email" name="user_email" required>
+                </dd>
+            </dl>
+            <dl>
+                <dt>请输入您的注册手机号：</dt>
+                <dd>
+                    <input type="number" name="user_phone" required>
+                </dd>
+            </dl>
+            <button>下一步</button>
+        </form>
+    </div>
+</div>
+</body>
+</html>

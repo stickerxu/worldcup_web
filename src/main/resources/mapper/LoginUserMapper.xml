@@ -7,4 +7,34 @@
         insert into login_user(username, password, user_email, user_phone, invest_code, registry_time)
         values (#{username}, #{password}, #{user_email}, #{user_phone}, #{invest_code}, now())
     </insert>
+
+    <select id="getUserByUsername" parameterType="String" resultType="LoginUser">
+        select * from login_user where username = #{1}
+    </select>
+
+    <update id="updateLoginUserById" parameterType="LoginUser">
+        update login_user
+        <set>
+            <if test="password != null and password !=''">
+                password = #{password},
+            </if>
+            <if test="real_name != null and real_name !=''">
+                real_name = #{real_name},
+            </if>
+            <if test="user_email != null and user_email !=''">
+                user_email = #{user_email},
+            </if>
+            <if test="user_phone != null and user_phone !=''">
+                user_phone = #{user_phone},
+            </if>
+            <if test="invest_code != null and invest_code !=''">
+                invest_code = #{invest_code},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <update id="updateLoginUserPasswordById" parameterType="LoginUser">
+        update login_user set password = #{password} where id = #{id}
+    </update>
 </mapper>

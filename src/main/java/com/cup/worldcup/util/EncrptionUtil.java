@@ -1,5 +1,7 @@
 package com.cup.worldcup.util;
 
+import org.apache.commons.lang3.StringUtils;
+
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -14,7 +16,7 @@ public class EncrptionUtil {
     public static final String MD5_16_BIT_UPCASE = "sixteenbitupcase";
     //MD5 返回4种加密结果
     public static Map<String, String> md5(String message) throws NoSuchAlgorithmException, UnsupportedEncodingException {
-        if (isblank(message)) {
+        if (StringUtils.isBlank(message)) {
             return null;
         }
         Map<String, String> map = new HashMap<>();
@@ -28,7 +30,7 @@ public class EncrptionUtil {
 
     //SHA1 数字签名标准
     public static String sha1(String message) throws NoSuchAlgorithmException, UnsupportedEncodingException {
-        if (isblank(message)) {
+        if (StringUtils.isBlank(message)) {
             return "";
         }
         return encrypt(message, "SHA1");
@@ -36,7 +38,7 @@ public class EncrptionUtil {
 
     //SHA-256
     public static String sha256(String message) throws NoSuchAlgorithmException, UnsupportedEncodingException {
-        if (isblank(message)) {
+        if (StringUtils.isBlank(message)) {
             return "";
         }
         return encrypt(message, "SHA-256");
@@ -63,9 +65,5 @@ public class EncrptionUtil {
             sb.append(sr.nextInt(10));
         }
         return sb.toString();
-    }
-
-    private static boolean isblank(String message) {
-       return "".equals(message);
     }
 }

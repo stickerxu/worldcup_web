@@ -7,37 +7,45 @@
     <title>登录</title>
     <style>
         fieldset {
-            font-size: x-large;
+            width: 300px;
             text-align: center;
-            width: 350px;
+            margin: auto;
+            padding-top: 200px;
         }
-        fieldset label {
-            font-size: medium;
+        #forgetPass {
+            font-size: 0.875em;
+            text-decoration-line: none;
         }
-        fieldset button {
-            width: 80px;
+        #loginMessage {
+            color: red;
+            font-weight: bold;
         }
     </style>
+    <script>
+        //点击登录，按钮失效
+        $(function () {
+            $('#loginForm').submit(function () {
+                $('#loginButton').prop("disabled", true);
+            });
+        })
+    </script>
 </head>
 <body>
 <div layout:fragment="content">
-    <div class="ht-1"></div>
-    <h2>登录</h2>
     <fieldset>
-        <legend>Welcome</legend>
-        <form th:action="@{/loginSub}" method="post">
-            <div>
-                <label>用户名：</label>
-                <input name="username" placeholder="username" required>
-                <input type="hidden" name="token" th:value="${session.token}">
+        <form id="loginForm" th:action="@{/loginSub}" method="post">
+            <legend>请登录</legend>
+            <div class="form-group">
+                <p id="loginMessage" th:text="${message == null ? '' : message}"></p>
+                <input class="form-control" id="username" name="username" placeholder="请输入用户名">
             </div>
-            <div style="height: 10px"></div>
-            <div>
-                <button>登录</button>
+            <div class="form-group text-right">
+                <input type="password"  class="form-control" id="password" name="password" placeholder="请输入密码">
+                <a id="forgetPass" th:href="@{/login/findPass}">忘记密码？</a>
             </div>
+            <button class="btn btn-primary btn-block">立即登录</button>
         </form>
     </fieldset>
-    <div style="height: 400px"></div>
 </div>
 </body>
 </html>
