@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>IDEA激活</title>
+    <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            margin: auto;
+            text-align: center;
+            width: 580px;
+        }
+        a {
+            text-decoration-line: none;
+        }
+        h3 {
+            background-color: yellow;
+        }
+        ul > li {
+            margin-bottom: 2em;
+        }
+        #actCodeFrame {
+            border: 0.08em solid;
+            background-color: #f3f3f3;
+            display: none;
+        }
+    </style>
+    <script>
+        function getKey() {
+            $('#actCodeFrame').css("display", "block");
+        }
+    </script>
+</head>
+<body>
+<div class="container">
+    <h2>Sticker 提示您：</h2>
+    <h3>若资金允许，请<a href="https://www.jetbrains.com/idea/buy/" target="_blank">购买正版</a>，谢谢合作!</h3>
+    <h3>若资金允许，请<a href="https://www.jetbrains.com/idea/buy/" target="_blank">购买正版</a>，谢谢合作!</h3>
+    <h3>若资金允许，请<a href="https://www.jetbrains.com/idea/buy/" target="_blank">购买正版</a>，谢谢合作!</h3>
+    <p>学生凭学生证可<a href="https://sales.jetbrains.com/hc/zh-cn/articles/207154369-学生授权申请方式" target="_blank">免费申请</a>正版授权 |
+        创业公司可<a href="https://www.jetbrains.com/shop/eform/startup" target="_blank">5折购买</a>正版授权</p>
+    <hr>
+    <p style="text-align: left">激活方式（截至2018-08-01最新版本可用）：</p>
+    <div>
+        <ul style="text-align: left">
+            <li>Licenese Server：http://idea.wannacorn.com &emsp;<a href="/help.html" target="_blank">使用帮助</a></li>
+            <li>
+                <p>Activation Code: <a href="javascript:void(0)" onclick="getKey()">点击获取注册码</a></p>
+                <p><strong>使用前请将“0.0.0.0 account.jetbrains.com”添加到hosts文件中</strong></p>
+                <iframe id="actCodeFrame" src="http://idea.lanyus.com/getkey?userName=userName" style="width: 100%;height: 150px" frameborder="0" >
+                    <p>Your browser does not support iframes.</p>
+                </iframe>
+            </li>
+            <li>破解补丁：<a href="/lib/JetbrainsCrack-2.10-release-enc.jar">JetbrainsCrack-2.10-release-enc.jar</a> &emsp;<a href="/help.html" target="_blank">使用帮助</a></li>
+        </ul>
+    </div>
+    <hr>
+    <p>欢迎访问我的主页：<a href="https://www.wannacorn.com" target="_blank">WannaCorn.com</a></p>
+</div>
+</body>
+</html>

@@ -43,7 +43,14 @@ public class WorldcupApplication {
             list.add("/login*");
             list.add("/login/**");
             list.add("/markdown/**");
+            list.add("/idea/**");
             return list;
+        }
+
+        @Override
+        public void addViewControllers(ViewControllerRegistry registry) {
+            registry.addViewController("/idea").setViewName("idea/idea");
+            registry.addViewController("/idea/help").setViewName("idea/help");
         }
     }
 }
