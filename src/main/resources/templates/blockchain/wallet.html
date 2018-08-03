@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout}"
+      lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>钱包推荐</title>
+    <style>
+        p {
+            text-indent: 2rem;
+        }
+    </style>
+</head>
+<body>
+<div layout:fragment="content" class="container">
+    <div style="height: 30px"></div>
+    <h3>钱包推荐</h3>
+    <hr>
+    <p>
+        不管你进行加密货币的交易，还是挖矿，还是底层开发，钱包可以说是不可或缺的一个东西。通常情况下，你需要准备两个钱包，
+        一个是基于以太坊协议的钱包，另一个是比特币协议的钱包。目前来看， TOP100的Dapps中，超过90个是基于以太坊ERC-20协议开发的，
+        也就是说你只需要拥有一个ERC-20协议的钱包地址就可以完成90%以上货币的自由交易。
+    </p>
+    <p>钱包根据安全等级分为：实体钱包，手机钱包，交易所钱包，网页钱包。下面给大家推荐两款我在用的手机钱包：</p>
+    <div class="row">
+        <div class="col-sm-6 text-center">
+            <div style="height: 2rem">
+                <strong>Ethereum Wallet：</strong>
+                <img src="https://token.im/img/appLogo.cdfd8a6a.svg" alt="imLogo" width="4%">&nbsp;
+                <strong>imToken</strong>
+            </div>
+            <div style="height: 35rem">
+                <img src="https://token.im/img/home-banner.23b6c00e.png" alt="imtoken" width="330">
+            </div>
+            <div class="mt-2">支持 ETH、以及 ERC-20 代币 <strong>imtoken</strong>&emsp;<a href="https://token.im/download" target="_blank">下载地址</a></div>
+        </div>
+        <div class="col-sm-6 text-center">
+            <div style="height: 2rem">
+                <strong>Bitcoin Wallet：</strong>
+                <img src="https://login.blockchain.com/img/blue-logo-ea5f627851cb67fcdb31b3907dd0f7ddcd7ea4cf.svg" alt="bcLogo" width="4%">&nbsp;
+                <strong>Blockchain</strong>
+            </div>
+            <div style="height: 35rem">
+                <img src="https://www.blockchain.com/static/img/wallet/app-image@2x.png" alt="imtoken" width="180" style="margin-top: 10px">
+            </div>
+            <div class="mt-2">支持所有协议的 <strong>Blockchain</strong>&emsp;<a href="https://www.blockchain.com/zh-cn/wallet" target="_blank">下载地址</a></div>
+        </div>
+    </div>
+    <div style="height: 50px"></div>
+</div>
+</body>
+</html>

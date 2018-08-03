@@ -85,7 +85,7 @@
                     <a class="nav-link dropdown-toggle"  data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">区块链</a>
                     <div class="dropdown-menu">
                         <a class="dropdown-item" th:href="@{#}">主流货币</a>
-                        <a class="dropdown-item" th:href="@{#}">钱包推荐</a>
+                        <a class="dropdown-item" th:href="@{/blockchain/wallet}">钱包推荐</a>
                         <a class="dropdown-item" th:href="@{#}">技术分享</a>
                     </div>
                 </li>
@@ -110,9 +110,10 @@
         </div>
     </nav>
 </div>
-<div layout:fragment="content" class="clearfix" style="height: 53.5rem;margin-top: 3.55rem"></div>
+<div layout:fragment="content" class="clearfix" style="margin-top: 3.55rem"></div>
 <button id="backTop" class="btn btn-outline-primary position-fixed" style="right: 0;bottom: 2rem">返回顶部</button>
 <footer class="clearfix text-center">
+    <hr>
    &copy; 2018 - 2019 WorldCup.Inc
 </footer>
 </body>
