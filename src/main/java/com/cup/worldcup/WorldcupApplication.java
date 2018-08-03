@@ -31,26 +31,14 @@ public class WorldcupApplication {
 
         @Override
         public void addInterceptors(InterceptorRegistry registry) {
-            registry.addInterceptor(methonInterceptor).addPathPatterns("/**").excludePathPatterns(excludePath());
+            registry.addInterceptor(methonInterceptor).addPathPatterns(filterPath());
         }
-        private List<String> excludePath() {
+        private List<String> filterPath() {
             List<String> list = new ArrayList<>();
-            list.add("/webjars/**");
-            list.add("/static/**");
-            list.add("/");
-            list.add("/registry*");
-            list.add("/registry/**");
-            list.add("/login*");
-            list.add("/login/**");
-            list.add("/markdown/**");
-            list.add("/idea/**");
+            list.add("/breakwall/**");
+            list.add("/logout");
+            list.add("//user/**");
             return list;
-        }
-
-        @Override
-        public void addViewControllers(ViewControllerRegistry registry) {
-            registry.addViewController("/idea").setViewName("idea/idea");
-            registry.addViewController("/idea/help").setViewName("idea/help");
         }
     }
 }
