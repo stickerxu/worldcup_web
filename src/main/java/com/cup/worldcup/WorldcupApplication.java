@@ -37,7 +37,7 @@ public class WorldcupApplication {
             List<String> list = new ArrayList<>();
             list.add("/breakwall/**");
             list.add("/logout");
-            list.add("//user/**");
+            list.add("/user/**");
             return list;
         }
     }
