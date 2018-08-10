@@ -7,6 +7,9 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
@@ -24,6 +27,7 @@ public class WorldcupApplication {
     }
 
     @Configuration
+    @PropertySource("classpath:application.properties")
     class WorldcupMvcConfig implements WebMvcConfigurer {
 
         @Autowired
@@ -38,7 +42,13 @@ public class WorldcupApplication {
             list.add("/breakwall/**");
             list.add("/logout");
             list.add("/user/**");
+            list.add("/adm/**");
             return list;
+        }
+
+        @Override
+        public void addViewControllers(ViewControllerRegistry registry) {
+
         }
     }
 }

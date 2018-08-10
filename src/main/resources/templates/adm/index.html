@@ -4,21 +4,26 @@
       lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <title>出错啦~！</title>
+    <title>管理后台</title>
     <style>
-        p {
-            font-size: 18px;
-            font-weight: bold;
-            color: red;
+        a,a:hover,a:active {
+            text-decoration-line: none;
         }
     </style>
 </head>
 <body>
 <div layout:fragment="content" class="container">
     <div class="t-space"></div>
-    <h2>抱歉！出错啦~请稍后再试！</h2>
+    <h2>管理后台</h2>
     <hr>
-    <p th:text="${message == null ? '' : message}"></p>
+    <div>
+        <ul>
+            <li>
+                <a href="/adm/article/add">添加文章</a>
+            </li>
+        </ul>
+    </div>
+    <div style="height: 30rem"></div>
 </div>
 </body>
 </html>

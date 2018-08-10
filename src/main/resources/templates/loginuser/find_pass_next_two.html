@@ -19,8 +19,10 @@
     </script>
 </head>
 <body>
-<div layout:fragment="content">
+<div layout:fragment="content" class="container">
+    <div class="t-space"></div>
     <h2>找回密码</h2>
+    <hr>
     <div>
         <form id="findpass-form" th:action="@{/login/findPassSub}" method="post">
             <dl>

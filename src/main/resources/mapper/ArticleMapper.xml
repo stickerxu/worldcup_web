@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cup.worldcup.mapper.ArticleMapper">
+    <insert id="saveArticle" parameterType="Article">
+        insert into article(`type`, title, file_name, create_time)
+        values (#{type}, #{title}, #{file_name}, now())
+    </insert>
+    <select id="getMaxArticleIdByType" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+        select count(*) from article
+        where `type` = #{type}
+    </select>
+    <select id="listTopTenArticleByType" parameterType="java.lang.Integer" resultType="Article">
+        select id, title from article
+        where `type` = #{type}
+        order by id desc
+        limit 10
+    </select>
+    <select id="getArticleById" parameterType="java.lang.Integer" resultType="Article">
+        select * from article
+        where id = #{id}
+    </select>
+</mapper>

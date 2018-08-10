@@ -13,22 +13,55 @@
             height: 400px;
             background: aquamarine;
         }
-        table th,table td {
+
+        table th, table td {
             text-align: center;
             border: solid;
         }
+
         @keyframes block {
-            0%  {left:0px; bottom:400px;}
-            11% {left:400px; bottom:400px;}
-            22% {left:400px; bottom:320px;}
-            33% {left:0px; bottom:320px;}
-            44% {left:0px; bottom:240px;}
-            55% {left:400px; bottom:240px;}
-            66% {left:400px; bottom:160px;}
-            77% {left:0px; bottom:160px;}
-            88% {left:0px; bottom:80px;}
-            100% {left:400px; bottom:80px;}
+            0% {
+                left: 0px;
+                bottom: 400px;
+            }
+            11% {
+                left: 400px;
+                bottom: 400px;
+            }
+            22% {
+                left: 400px;
+                bottom: 320px;
+            }
+            33% {
+                left: 0px;
+                bottom: 320px;
+            }
+            44% {
+                left: 0px;
+                bottom: 240px;
+            }
+            55% {
+                left: 400px;
+                bottom: 240px;
+            }
+            66% {
+                left: 400px;
+                bottom: 160px;
+            }
+            77% {
+                left: 0px;
+                bottom: 160px;
+            }
+            88% {
+                left: 0px;
+                bottom: 80px;
+            }
+            100% {
+                left: 400px;
+                bottom: 80px;
+            }
         }
+
         .move-block {
             display: none;
             position: relative;
@@ -41,6 +74,7 @@
             animation-play-state: paused;
             animation-fill-mode: forwards;
         }
+
         .btn-begin {
             position: absolute;
             left: 325px;
@@ -61,23 +95,25 @@
                     var speed = setInterval(speedUp, 100);
                 }
             });
-            
+
             function speedUp() {
                 var speed = $('#speed').val();
                 if (speed > 1) {
-                    $('#speed').val(speed-2.5);
+                    $('#speed').val(speed - 2.5);
                 } else {
                     $('#speed').val(0.5);
                 }
-                $('#block').css("animation-duration", speed+"s");
+                $('#block').css("animation-duration", speed + "s");
             }
         });
 
     </script>
 </head>
 <body>
-<div layout:fragment="content">
+<div layout:fragment="content" class="container">
+    <div class="t-space"></div>
     <h2>比分预测</h2>
+    <hr>
     <!--比分预测表格-->
     <div>
         <table>

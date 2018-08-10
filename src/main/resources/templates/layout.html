@@ -20,18 +20,22 @@
             margin-right: 2em;
             background-color: #f3f3f3;
         }
+
+        .t-space {
+            height: 30px;
+        }
     </style>
     <script>
         $(function () {
             //页面加载滚动条监听
-            if ($(window).scrollTop()>100) {
+            if ($(window).scrollTop() > 100) {
                 $("#backTop").show();
             } else {
                 $("#backTop").hide();
             }
             //滚动条监听
-            $(window).scroll(function(){
-                if ($(window).scrollTop()>100) {
+            $(window).scroll(function () {
+                if ($(window).scrollTop() > 100) {
                     $("#backTop").show();
                 } else {
                     $("#backTop").hide();
@@ -39,12 +43,12 @@
             });
 
             //当点击跳转链接后，回到页面顶部位置
-            $("#backTop").click(function(){
+            $("#backTop").click(function () {
                 if ($('html').scrollTop()) {
-                    $('html').animate({ scrollTop: 0 }, 500);
+                    $('html').animate({scrollTop: 0}, 500);
                     return false;
                 }
-                $('body').animate({ scrollTop: 0 }, 500);
+                $('body').animate({scrollTop: 0}, 500);
                 return false;
             });
         })
@@ -52,11 +56,12 @@
 </head>
 <body>
 <div>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top" style="background-color: darkcyan">
         <a th:href="@{/}">
             <img src="https://www.wannacorn.com//static/img/icon/icon_logo48.ico" width="85%">
         </a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
+                aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
@@ -82,7 +87,8 @@
                     </a>
                 </li>
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle"  data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">区块链</a>
+                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button"
+                       aria-haspopup="true" aria-expanded="false">区块链</a>
                     <div class="dropdown-menu">
                         <a class="dropdown-item" th:href="@{#}">主流货币</a>
                         <a class="dropdown-item" th:href="@{/blockchain/wallet}">钱包推荐</a>
@@ -90,7 +96,8 @@
                     </div>
                 </li>
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle"  data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">工具</a>
+                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button"
+                       aria-haspopup="true" aria-expanded="false">工具</a>
                     <div class="dropdown-menu">
                         <a class="dropdown-item" th:href="@{/pick}">2018世界杯</a>
                         <a class="dropdown-item" th:href="@{/encryp}">我要加密</a>
@@ -104,7 +111,8 @@
             <div class="navbar-nav ml-auto">
                 <a class="nav-item nav-link" th:if="${session.user == null}" th:href="@{/login}">登录</a>
                 <a class="nav-item nav-link" th:if="${session.user == null}" th:href="@{/registry}">注册</a>
-                <a class="nav-item nav-link" th:if="${session.user != null}" th:href="@{/user/info}" th:text="${'你好，' + session.user.username}"></a>
+                <a class="nav-item nav-link" th:if="${session.user != null}" th:href="@{/user/info}"
+                   th:text="${'你好，' + session.user.username}"></a>
                 <a class="nav-item nav-link" th:if="${session.user != null}" th:href="@{/logout}">退出</a>
             </div>
         </div>
@@ -114,7 +122,7 @@
 <button id="backTop" class="btn btn-outline-primary position-fixed" style="right: 0;bottom: 2rem">返回顶部</button>
 <footer class="clearfix text-center">
     <hr>
-   &copy; 2018 - 2019 WorldCup.Inc
+    &copy; 2018 - 2019 WorldCup.Inc
 </footer>
 </body>
 </html>
