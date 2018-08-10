@@ -12,10 +12,12 @@
             margin: auto;
             padding-top: 200px;
         }
+
         #forgetPass {
             font-size: 0.875em;
             text-decoration-line: none;
         }
+
         #loginMessage {
             color: red;
             font-weight: bold;
@@ -40,7 +42,7 @@
                 <input class="form-control" id="username" name="username" placeholder="请输入用户名">
             </div>
             <div class="form-group text-right">
-                <input type="password"  class="form-control" id="password" name="password" placeholder="请输入密码">
+                <input type="password" class="form-control" id="password" name="password" placeholder="请输入密码">
                 <a id="forgetPass" th:href="@{/login/findPass}">忘记密码？</a>
             </div>
             <button class="btn btn-primary btn-block">立即登录</button>

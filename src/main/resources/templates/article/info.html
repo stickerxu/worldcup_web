@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout}"
+      lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${article.title}"></title>
+    <style>
+        iframe {
+            width: 100%;
+            border: none;
+        }
+    </style>
+    <script>
+        $(function () {
+            var ifm= $('#articleInfo');
+            ifm.height=document.body.scrollHeight;
+        })
+    </script>
+</head>
+<body>
+<div layout:fragment="content" class="container">
+    <div class="t-space"></div>
+    <iframe id="articleInfo" src="https://www.wannacorn.com/article/success.html" scrolling="no">无法显示</iframe>
+</div>
+</body>
+</html>

@@ -10,6 +10,7 @@
         table td {
             padding-bottom: 1em;
         }
+
         table tr:last-child > td {
             text-align: right;
         }
@@ -33,8 +34,10 @@
     </script>
 </head>
 <body>
-<div layout:fragment="content">
+<div layout:fragment="content" class="container">
+    <div class="t-space"></div>
     <h2>修改密码</h2>
+    <hr>
     <div>
         <form id="updatePassForm" th:action="@{/user/updatePassSub}" method="post">
             <table>

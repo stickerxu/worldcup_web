@@ -17,6 +17,7 @@
             $('#myCodeButton').click(function () {
                 $.get("/breakwall/myCode", myCodeButtonCallback);
             });
+
             function myCodeButtonCallback(data) {
                 $('#resultMsg').text(data);
                 $('#resultMsg').removeClass("d-none");
@@ -26,14 +27,16 @@
     </script>
 </head>
 <body>
-<div layout:fragment="content">
+<div layout:fragment="content" class="container">
     <div>
         <form th:action="@{/breakwall/verifyCode}" method="post">
             <h4>邀请码</h4>
-            <strong class="text-danger" th:text="${session.verifyCodeMsg == null ? '' : session.verifyCodeMsg}"></strong>
+            <strong class="text-danger"
+                    th:text="${session.verifyCodeMsg == null ? '' : session.verifyCodeMsg}"></strong>
             <div class="form-group row">
                 <div class="col-md-8">
-                    <input class="form-control" id="invest_code" name="invest_code" maxlength="16" minlength="16" placeholder="请输入16位邀请码">
+                    <input class="form-control" id="invest_code" name="invest_code" maxlength="16" minlength="16"
+                           placeholder="请输入16位邀请码">
                 </div>
                 <div class="form-group col-md-2">
                     <button type="button" id="myCodeButton" class="btn btn-outline-info">
