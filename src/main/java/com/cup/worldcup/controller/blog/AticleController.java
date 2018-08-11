@@ -34,14 +34,17 @@ public class AticleController {
             return ResponsePageUtil.errorPage("参数有误！", modelMap);
         }
         try {
-            Document artDoc = Jsoup.parse(new File(webArticlePath + article.getFile_name()), "UTF-8", Constants.WEB_URL);
+            StringBuilder pathBuilder = new StringBuilder();
+            pathBuilder.append(webArticlePath).append(File.separator).append(article.getType())
+                    .append(File.separator).append(article.getFile_name());
+            Document artDoc = Jsoup.parse(new File(pathBuilder.toString()), "UTF-8", Constants.WEB_URL);
             String script = artDoc.head().select("script").outerHtml();
             String style = artDoc.head().select("style").outerHtml();
             String body = artDoc.body().html();
-            StringBuilder builder = new StringBuilder();
-            builder.append(style).append(script).append(body);
+            StringBuilder htmlBuilder = new StringBuilder();
+            htmlBuilder.append(style).append(script).append(body);
             modelMap.put("article",article);
-            modelMap.put("includeHtml",builder.toString());
+            modelMap.put("includeHtml", htmlBuilder.toString());
             return "article/info";
         } catch (IOException e) {
             log.error(e.getMessage(), e);
