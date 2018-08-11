@@ -18,6 +18,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 
@@ -48,7 +49,11 @@ public class AdmArticleController {
             builder.append("article_").append(article.getType()).append("_").append(++maxArticleId)
                     .append(suffix);
             //上传
-            Files.copy(file.getInputStream(), Paths.get(webArticlePath, builder.toString()), StandardCopyOption.REPLACE_EXISTING);
+            Path dirPath = Paths.get(webArticlePath, String.valueOf(article.getType()));
+            if (Files.notExists(dirPath)) {
+                Files.createDirectories(dirPath);
+            }
+            Files.copy(file.getInputStream(), Paths.get(dirPath.toString(), builder.toString()), StandardCopyOption.REPLACE_EXISTING);
             //入库
             article.setFile_name(builder.toString());
             articleService.saveArticle(article);
