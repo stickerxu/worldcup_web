@@ -24,7 +24,7 @@ import java.io.IOException;
 public class AticleController {
     @Autowired
     private ArticleService articleService;
-    @Value("${web.article.path.dev}")
+    @Value("${web.article.path.mac}")
     private String webArticlePath;
 
     @GetMapping("/{id:\\d+}")
