@@ -4,6 +4,7 @@ import com.cup.worldcup.Constants;
 import com.cup.worldcup.entity.Article;
 import com.cup.worldcup.entity.OperateResult;
 import com.cup.worldcup.service.ArticleService;
+import com.cup.worldcup.util.ParameterUtil;
 import com.cup.worldcup.util.ResponsePageUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,11 +17,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.util.List;
 
 @Controller
 @Slf4j
@@ -31,6 +34,30 @@ public class AdmArticleController {
 
     @Value("${web.article.path.mac}")
     private String webArticlePath;
+
+    @RequestMapping({"", "/"})
+    public String list(HttpServletRequest request, ModelMap modelMap) {
+        Integer type = ParameterUtil.parseInteger(request.getParameter("type"));
+        String title = request.getParameter("title");
+        Integer page = ParameterUtil.parseInteger(request.getParameter("page"));
+        Integer defType = 0;
+        if (type != null) {
+            defType = type;
+        }
+        Article article = new Article();
+        //todo 分页
+        article.setBgSize(0);
+        article.setCtSize(20);
+        article.setType(defType);
+        modelMap.put("type", defType);
+        if (ParameterUtil.isNotBlank(title)) {
+            article.setTitle(title);
+            modelMap.put("title", title);
+        }
+        List<Article> articles = articleService.listArticleByCriteria(article);
+        modelMap.put("resultList", articles);
+        return "adm/article/list";
+    }
 
     @GetMapping("/add")
     public String add() {

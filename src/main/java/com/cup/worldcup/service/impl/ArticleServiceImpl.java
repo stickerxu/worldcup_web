@@ -24,6 +24,16 @@ public class ArticleServiceImpl implements ArticleService {
     }
 
     @Override
+    public List<Article> listArticleByCriteria(Article article) {
+        return articleMapper.listArticleByCriteria(article);
+    }
+
+    @Override
+    public Integer countArticleByCriteria(Article article) {
+        return articleMapper.countArticleByCriteria(article);
+    }
+
+    @Override
     public List<Article> listTopTenArticleByType(Integer type) {
         return articleMapper.listTopTenArticleByType(type);
     }
