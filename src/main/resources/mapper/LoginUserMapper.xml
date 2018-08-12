@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.cup.worldcup.mapper.LoginUserMapper">
+<mapper namespace="com.worldcup.web.mapper.LoginUserMapper">
     <insert id="insertLoginUser" parameterType="LoginUser">
         insert into login_user(username, password, user_email, user_phone, invest_code, registry_time)
         values (#{username}, #{password}, #{user_email}, #{user_phone}, #{invest_code}, now())
