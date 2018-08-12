@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.cup.worldcup.mapper.ArticleMapper">
+<mapper namespace="com.worldcup.web.mapper.ArticleMapper">
     <insert id="saveArticle" parameterType="Article">
         insert into article(`type`, title, file_name, create_time)
         values (#{type}, #{title}, #{file_name}, now())
@@ -13,7 +13,7 @@
     </select>
     <select id="listTopTenArticleByType" parameterType="java.lang.Integer" resultType="Article">
         select id, title from article
-        where `type` = #{type}
+        where `type` = #{type} and status = 1
         order by id desc
         limit 10
     </select>
