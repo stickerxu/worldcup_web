@@ -21,4 +21,28 @@
         select * from article
         where id = #{id}
     </select>
+    <select id="listArticleByCriteria" parameterType="Article" resultType="Article">
+        select * from article
+        <where>
+            <if test="type != null and type != 0">
+                `type` = #{type}
+            </if>
+            <if test="title != null">
+                and title like concat('%', #{title}, '%')
+            </if>
+        </where>
+        order by id
+        limit #{bgSize}, #{ctSize}
+    </select>
+    <select id="countArticleByCriteria" parameterType="Article" resultType="java.lang.Integer">
+        select count(*) from article
+        <where>
+            <if test="type != null and type != 0">
+                `type` = #{type}
+            </if>
+            <if test="title != null">
+                and title like concat('%', #{title}, '%')
+            </if>
+        </where>
+    </select>
 </mapper>
