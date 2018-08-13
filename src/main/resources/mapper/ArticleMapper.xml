@@ -13,7 +13,7 @@
     </select>
     <select id="listTopTenArticleByType" parameterType="java.lang.Integer" resultType="Article">
         select id, title from article
-        where `type` = #{type} and status = 1
+        where `type` = #{type} and status = 2
         order by id desc
         limit 10
     </select>

@@ -9,14 +9,28 @@
         .container {
             width: 730px;
         }
-
+        #inHtml {
+            font-size: medium;
+            font-family: SimSun;
+            line-height: 2rem;
+        }
+        #inHtml h1,#inHtml h2,#inHtml h3,#inHtml h4,#inHtml h5,#inHtml h6 {
+            line-height: 2rem;
+        }
     </style>
 </head>
 <body>
 <div layout:fragment="content" class="container">
     <div class="t-space"></div>
-    <div id="inHtml" th:utext="${includeHtml}"></div>
+    <h2 th:text="${article.title}">this is article's title</h2>
     <hr>
+    <!--todo 作者、发布时间-->
+    <div class="row">
+        <p class="col"><strong>作者：Sticker</strong></p>
+        <p class="col text-right"><samp>发布时间：2018-08-14 00:00:00</samp></p>
+    </div>
+    <div id="inHtml" th:utext="${includeHtml}"></div>
+    <div class="t-space"></div>
 </div>
 </body>
 </html>
