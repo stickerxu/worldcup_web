@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout}"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{fragments/layout}"
       lang="zh-CN">
 <head>
     <meta charset="UTF-8">
@@ -60,7 +60,7 @@
             $('#markdownText').on('keyup blur', function () {
                 var markdownString = $('#markdownText').val();
                 $('#preview').html(marked(markdownString));
-                $('#htmlcode').text(marked(markdownString).replace(/\sid=".*"/g, ""));
+                $('#htmlcode').text(marked(markdownString).replace(/\sid=".*"/g, "").replace(/\s==(.*)==/g, "<mark>$1</mark>"));
             });
             $('#markdownText').keydown(function (e) {
                 if (e.keyCode == 9) {

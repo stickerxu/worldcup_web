@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout}"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{fragments/layout_index}"
       lang="zh-CN">
 <head>
     <meta charset="UTF-8">
@@ -86,9 +86,9 @@
             </div>
             <div class="col-md-5 offset-md-1">
                 <blockquote>
-                    <h5>SringBoot</h5>
+                    <h5>Spring Data</h5>
                 </blockquote>
-                <ul class="list-group list-group-flush my-article">
+                <ul class="list-group list-group-flush my-article" th:each="art : ${sdArts}">
                     <li class="list-group-item">this is article title</li>
                 </ul>
             </div>

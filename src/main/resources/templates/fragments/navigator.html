@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>navigator</title>
+</head>
+<body>
+<div th:fragment="navigator">
+    <div>
+        <nav class="navbar navbar-expand-lg navbar-dark fixed-top" style="background-color: darkcyan">
+            <a th:href="@{/}">
+                <img src="https://www.wannacorn.com/static/img/icon/icon_logo48.ico" width="85%">
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
+                    aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/}">首页</a>
+                    </li>
+                    <!--<li class="nav-item">
+                        <a class="nav-link" href="/">博客</a>
+                    </li>-->
+                    <li class="nav-item">
+                        <a class="nav-link" href="http://git.wannacorn.com/" target="_blank">代码管理</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/breakwall}">我要翻墙</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/markdown}">MarkDown编辑器</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="http://idea.wannacorn.com" target="_blank">
+                            IDEA激活<span class="badge badge-light">New</span>
+                        </a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button"
+                           aria-haspopup="true" aria-expanded="false">区块链</a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" th:href="@{#}">货币资讯</a>
+                            <a class="dropdown-item" th:href="@{/blockchain/wallet}">钱包推荐</a>
+                            <a class="dropdown-item" th:href="@{#}">技术分享</a>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button"
+                           aria-haspopup="true" aria-expanded="false">工具</a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" th:href="@{/pick}">2018世界杯</a>
+                            <a class="dropdown-item" th:href="@{/encryp}">我要加密</a>
+                            <a class="dropdown-item" th:href="@{/charConvert}">汉字转拼音</a>
+                            <a class="dropdown-item" th:href="@{/charConvert}">px、em转换器</a>
+                            <a class="dropdown-item" th:href="@{/markdown}">MarkDown编辑器</a>
+                            <a class="dropdown-item" href="http://idea.wannacorn.com" target="_blank">IDEA激活</a>
+                        </div>
+                    </li>
+                </ul>
+                <div class="navbar-nav ml-auto">
+                    <a class="nav-item nav-link" th:if="${session.user == null}" th:href="@{/login}">登录</a>
+                    <a class="nav-item nav-link" th:if="${session.user == null}" th:href="@{/registry}">注册</a>
+                    <a class="nav-item nav-link" th:if="${session.user != null}" th:href="@{/user/info}"
+                       th:text="${'你好，' + session.user.username}"></a>
+                    <a class="nav-item nav-link" th:if="${session.user != null}" th:href="@{/logout}">退出</a>
+                </div>
+            </div>
+        </nav>
+    </div>
+</div>
+</body>
+</html>

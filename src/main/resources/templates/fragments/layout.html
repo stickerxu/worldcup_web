@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/liymeleaf/layout"
+      lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="widli=device-widli, initial-scale=1">
+    <link rel="apple-touch-icon" href="https://www.wannacorn.com/static/img/icon/icon_logo48.ico?v=20180720">
+    <link rel="shortcut icon" href="https://www.wannacorn.com/static/img/icon/icon_logo48.ico?v=20180720">
+    <link rel="icon" href="https://www.wannacorn.com/static/img/icon/icon_logo48.ico?v=20180720">
+    <title>WorldCup2018</title>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/4.1.1/css/bootstrap.min.css}">
+    <script th:src="@{/webjars/jquery/3.3.1-1/jquery.min.js}"></script>
+    <script th:src="@{/webjars/bootstrap/4.1.1/js/bootstrap.bundle.min.js}"></script>
+    <script th:src="@{/webjars/bootstrap/4.1.1/js/bootstrap.min.js}"></script>
+    <style>
+        body {
+            margin-left: 2em;
+            margin-right: 2em;
+            background-color: #f3f3f3;
+        }
+
+        .t-space {
+            margin-top: 5.55rem;
+        }
+    </style>
+    <script>
+        $(function () {
+            //页面加载滚动条监听
+            if ($(window).scrollTop() > 100) {
+                $("#backTop").show();
+            } else {
+                $("#backTop").hide();
+            }
+            //滚动条监听
+            $(window).scroll(function () {
+                if ($(window).scrollTop() > 100) {
+                    $("#backTop").show();
+                } else {
+                    $("#backTop").hide();
+                }
+            });
+
+            //当点击跳转链接后，回到页面顶部位置
+            $("#backTop").click(function () {
+                if ($('html').scrollTop()) {
+                    $('html').animate({scrollTop: 0}, 500);
+                    return false;
+                }
+                $('body').animate({scrollTop: 0}, 500);
+                return false;
+            });
+        })
+    </script>
+</head>
+<body>
+<div th:replace="fragments/navigator :: navigator"></div>
+<div class="clearfix t-space"></div>
+<div layout:fragment="content"></div>
+<button id="backTop" class="btn btn-outline-primary position-fixed" style="right: 0;bottom: 2rem">返回顶部</button>
+<footer class="clearfix text-center">
+    <hr>
+    &copy; 2018 - 2019 WorldCup.Inc
+</footer>
+</body>
+</html>
