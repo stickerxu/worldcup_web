@@ -28,7 +28,6 @@
 
     <h2 th:text="${article.title}">this is article's title</h2>
     <hr>
-    <!--todo 作者、发布时间-->
     <div class="row">
         <p class="col"><strong th:text="${'作者：' + article.author}">作者：author</strong></p>
         <p class="col text-right"><samp th:text="${article.publish_time == null ?
