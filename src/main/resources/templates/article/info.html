@@ -1,36 +1,42 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout}"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{fragments/layout}"
       lang="zh-CN">
 <head>
     <meta charset="UTF-8">
     <title th:text="${article.title}"></title>
+    <link rel="stylesheet" href="/webjars/highlightjs/9.8.0/styles/default.min.css">
     <style>
         .container {
-            width: 730px;
+            width: 900px;
         }
-        #inHtml {
-            font-size: medium;
-            font-family: SimSun;
-            line-height: 2rem;
+        #inHtml pre {
+            background-color: lightyellow;
+            line-height: 1.2rem;
+            padding: 1rem;
         }
-        #inHtml h1,#inHtml h2,#inHtml h3,#inHtml h4,#inHtml h5,#inHtml h6 {
+        #inHtml p {
+            text-indent: 3px;
+        }
+        #inHtml,#inHtml h1,#inHtml h2,#inHtml h3,#inHtml h4,#inHtml h5,#inHtml h6 {
             line-height: 2rem;
         }
     </style>
 </head>
 <body>
 <div layout:fragment="content" class="container">
-    <div class="t-space"></div>
+
     <h2 th:text="${article.title}">this is article's title</h2>
     <hr>
     <!--todo 作者、发布时间-->
     <div class="row">
-        <p class="col"><strong>作者：Sticker</strong></p>
-        <p class="col text-right"><samp>发布时间：2018-08-14 00:00:00</samp></p>
+        <p class="col"><strong th:text="${'作者：' + article.author}">作者：author</strong></p>
+        <p class="col text-right"><samp th:text="${article.publish_time == null ?
+                '发布时间：' + #dates.format(article.create_time, 'yyyy-MM-dd HH:mm:ss') :
+                '发布时间：' + #dates.format(article.publish_time, 'yyyy-MM-dd HH:mm:ss')}">
+            发布时间：yyyy-MM-dd HH:mm:ss</samp></p>
     </div>
     <div id="inHtml" th:utext="${includeHtml}"></div>
-    <div class="t-space"></div>
 </div>
 </body>
 </html>
