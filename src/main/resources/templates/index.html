@@ -10,6 +10,11 @@
             margin: 0;
             padding: 0;
         }
+        blockquote {
+            margin: 0;
+            padding-left: 5px;
+            border-left: solid darkcyan;
+        }
         .jumbotron {
             border-radius: unset;
             background-color: darkcyan;
@@ -23,20 +28,18 @@
             text-decoration-line: none;
             color: white;
         }
-        blockquote {
-            margin: 0;
-            padding-left: 5px;
-            border-left: solid darkcyan;
-        }
         #connectWay:hover {
             color: lightcyan;
         }
-        .my-article a {
+        .myArticle a {
             color: gray;
         }
-        .my-article a:hover {
+        .myArticle a:hover {
             text-decoration-line: none;
             color: darkgray;
+        }
+        .myArtBlock {
+            margin-bottom: 40px;
         }
     </style>
     <script>
@@ -75,21 +78,15 @@
         </div>
     </div>
     <div class="container">
-        <div class="row">
-            <div class="col-md-5">
+        <div class="row" th:if="${not #lists.isEmpty(articleMap)}">
+            <div th:each="arts, artStat : ${articleMap}" th:if="${not #lists.isEmpty(arts.value)}"
+                 th:class="${artStat.odd ? 'col-md-5 myArtBlock' : 'col-md-5 offset-md-1 myArtBlock'}">
                 <blockquote>
-                    <h5>区块链</h5>
+                    <h5 th:text="${arts.key}">Tag</h5>
                 </blockquote>
-                <ul class="list-group list-group-flush my-article" th:each="art : ${bcArts}">
-                    <a th:href="${'/article/' + art.id}"><li class="list-group-item" th:text="${art.title}">this is article title</li></a>
-                </ul>
-            </div>
-            <div class="col-md-5 offset-md-1">
-                <blockquote>
-                    <h5>Spring Data</h5>
-                </blockquote>
-                <ul class="list-group list-group-flush my-article" th:each="art : ${sdArts}">
-                    <li class="list-group-item">this is article title</li>
+                <ul class="list-group list-group-flush myArticle" th:if="${not #lists.isEmpty(arts.value)}">
+                    <a th:each="art : ${arts.value}" th:href="${'/article/' + art.id}">
+                        <li class="list-group-item" th:text="${art.title}">this is article title</li></a>
                 </ul>
             </div>
         </div>

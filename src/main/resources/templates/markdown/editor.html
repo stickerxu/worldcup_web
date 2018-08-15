@@ -27,10 +27,6 @@
             resize: none;
         }
 
-        #markdownText {
-            text-indent: 3px;
-        }
-
         #preview {
             padding: 5px;
         }
@@ -59,15 +55,39 @@
         $(function () {
             $('#markdownText').on('keyup blur', function () {
                 var markdownString = $('#markdownText').val();
+                markdownString = marked(markdownString).replace(/\sid=".*"/g, "").replace(/==(.*)==/g, "<mark>$1</mark>")
+                    .replace(/href="(.*)"/g, "href=\"$1\" target=\"_blank\"");
                 $('#preview').html(marked(markdownString));
-                $('#htmlcode').text(marked(markdownString).replace(/\sid=".*"/g, "").replace(/\s==(.*)==/g, "<mark>$1</mark>"));
+                $('#htmlcode').text(markdownString);
             });
             $('#markdownText').keydown(function (e) {
+                var start = this.selectionStart;
+                var end = this.selectionEnd;
+                if (e.keyCode == 13) {
+                    var lineFirstText = this.value.substring(this.value.lastIndexOf("\n") + 1, start);
+                    var reg = /^.*?-\s+/g;
+                    if (lineFirstText.match(reg)) {
+                        e.preventDefault();
+                        var lineSecondText = this.value.substring(start, this.value.length);
+                        this.value = this.value.substring(0, start);
+                        var ul = "\r\n- ";
+                        this.value += ul + lineSecondText;
+                    }
+                    reg = /^\d+\.\s+/g;
+                    if (lineFirstText.match(reg)) {
+                        e.preventDefault();
+                        reg = /^.*?\d+\.\s+/g;
+                        var olNum = reg.exec(lineFirstText).toString().trim().replace(/\./,'');
+                        ++olNum;
+                        var lineSecondText = this.value.substring(start, this.value.length);
+                        this.value = this.value.substring(0, start);
+                        var ul = "\r\n"+olNum+". ";
+                        this.value += ul + lineSecondText;
+                    }
+                }
                 if (e.keyCode == 9) {
                     e.preventDefault();
                     var indent = '    ';
-                    var start = this.selectionStart;
-                    var end = this.selectionEnd;
                     var selected = window.getSelection().toString();
                     selected = indent + selected.replace(/\n/g, '\n' + indent);
                     this.value = this.value.substring(0, start) + selected + this.value.substring(end);
