@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{fragments/layout}"
+      lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${articleTypeName}">文章分类</title>
+    <style>
+        .container {
+            max-width: 1080px;
+        }
+        .artTable {
+            width: 80%;
+            min-width: 750px;
+        }
+        .artTable tr {
+            border-bottom: solid 1px lightgrey;
+        }
+        .artTable td {
+            padding-top: 10px;
+        }
+        .artTable a {
+            color: gray;
+        }
+        .artTable a:hover {
+            text-decoration-line: none;
+            color: darkorange;
+        }
+    </style>
+</head>
+<body>
+<div layout:fragment="content" class="container">
+    <h2 th:text="${articleTypeName}">文章分类</h2>
+    <hr>
+    <div>
+        <table class="artTable">
+            <tr th:each="art : ${pageList}">
+                <td class="row m-0">
+                    <a class="col-md-8 p-0" th:href="${'/article/' + art.id}" th:text="${art.title}" target="_blank">文章标题1...</a>
+                    <span class="col-md-4 p-0 text-right" th:text="${#dates.format(art.publish_time, 'yyyy-MM-dd')}">yyyy-MM-dd</span>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+</body>
+</html>

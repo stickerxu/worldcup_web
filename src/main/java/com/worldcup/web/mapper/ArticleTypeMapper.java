@@ -8,5 +8,7 @@ import java.util.List;
 @Repository
 public interface ArticleTypeMapper {
 
-    List<ArticleType> listAll();
+    List<ArticleType> listIdAndNameByStatusLimitNum();
+
+    String getNameById(Integer id);
 }

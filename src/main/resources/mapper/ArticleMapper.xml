@@ -3,46 +3,22 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.worldcup.web.mapper.ArticleMapper">
-    <insert id="saveArticle" parameterType="Article">
-        insert into article(`type`, title, file_name, create_time)
-        values (#{type}, #{title}, #{file_name}, now())
-    </insert>
-    <select id="getMaxArticleIdByType" parameterType="java.lang.Integer" resultType="java.lang.Integer">
-        select count(*) from article
-        where `type` = #{type}
-    </select>
-    <select id="listTopTenArticleByType" parameterType="java.lang.Integer" resultType="Article">
-        select id, title from article
+    <select id="listTopTenArticleByType" parameterType="Integer" resultType="Article">
+        select id, `type`, title, publish_time from article
         where `type` = #{type} and status = 2
-        order by id desc
+        order by weight desc, id desc
         limit 10
     </select>
-    <select id="getArticleById" parameterType="java.lang.Integer" resultType="Article">
+    <select id="getArticleById" parameterType="Integer" resultType="Article">
         select * from article
         where id = #{id}
     </select>
-    <select id="listArticleByCriteria" parameterType="Article" resultType="Article">
-        select * from article
-        <where>
-            <if test="type != null and type != 0">
-                `type` = #{type}
-            </if>
-            <if test="title != null">
-                and title like concat('%', #{title}, '%')
-            </if>
-        </where>
-        order by id
-        limit #{bgSize}, #{ctSize}
+    <select id="listArticleByType" parameterType="Integer" resultType="Article">
+         select id, title, publish_time from article
+         where `type` = #{type} and status = 2
+         order by weight desc, id desc
     </select>
-    <select id="countArticleByCriteria" parameterType="Article" resultType="java.lang.Integer">
+    <select id="countArticleByType" parameterType="Article" resultType="Integer">
         select count(*) from article
-        <where>
-            <if test="type != null and type != 0">
-                `type` = #{type}
-            </if>
-            <if test="title != null">
-                and title like concat('%', #{title}, '%')
-            </if>
-        </where>
     </select>
 </mapper>

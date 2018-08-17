@@ -12,4 +12,7 @@ public class ArticleType extends BaseEntity implements Serializable {
 
     private Integer id;
     private String name;
+    //1 不显示；2 显示
+    private Integer status = 1;
+    private Integer weight = 0;
 }

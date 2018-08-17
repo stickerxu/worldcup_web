@@ -14,23 +14,13 @@ public class ArticleServiceImpl implements ArticleService {
     private ArticleMapper articleMapper;
 
     @Override
-    public void saveArticle(Article article) {
-        articleMapper.saveArticle(article);
+    public List<Article> listArticleByType(Integer type) {
+        return articleMapper.listArticleByType(type);
     }
 
     @Override
-    public Integer getMaxArticleIdByType(Integer type) {
-        return articleMapper.getMaxArticleIdByType(type);
-    }
-
-    @Override
-    public List<Article> listArticleByCriteria(Article article) {
-        return articleMapper.listArticleByCriteria(article);
-    }
-
-    @Override
-    public Integer countArticleByCriteria(Article article) {
-        return articleMapper.countArticleByCriteria(article);
+    public Integer countArticleByType(Article article) {
+        return articleMapper.countArticleByType(article);
     }
 
     @Override

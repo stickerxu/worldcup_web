@@ -6,5 +6,7 @@ import java.util.List;
 
 public interface ArticleTypeService {
 
-    List<ArticleType> listAll();
+    List<ArticleType> listIdAndNameByStatusLimitNum();
+
+    String getNameById(Integer id);
 }
