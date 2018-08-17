@@ -12,7 +12,6 @@
         }
         blockquote {
             margin: 0;
-            padding-left: 5px;
             border-left: solid darkcyan;
         }
         .jumbotron {
@@ -36,10 +35,22 @@
         }
         .myArticle a:hover {
             text-decoration-line: none;
-            color: darkgray;
+            color: darkorange;
         }
         .myArtBlock {
             margin-bottom: 40px;
+        }
+        .myRow {
+            margin: 0;
+        }
+        .myMore {
+            position: relative;
+            top: 0.3em;
+            color: darkcyan;
+        }
+        .myMore:hover {
+            color: darkorange;
+            text-decoration-line: none;
         }
     </style>
     <script>
@@ -81,12 +92,19 @@
         <div class="row" th:if="${not #lists.isEmpty(articleMap)}">
             <div th:each="arts, artStat : ${articleMap}" th:if="${not #lists.isEmpty(arts.value)}"
                  th:class="${artStat.odd ? 'col-md-5 myArtBlock' : 'col-md-5 offset-md-1 myArtBlock'}">
-                <blockquote>
-                    <h5 th:text="${arts.key}">Tag</h5>
-                </blockquote>
+                <div class="row myRow">
+                    <blockquote class="col-md-8">
+                        <h5 th:text="${arts.key}">Tag</h5>
+                    </blockquote>
+                    <div class="col-md-4 p-0 text-right">
+                        <a class="myMore" th:href="${'/article/more/' + arts.value[0].type}">更多>></a>
+                    </div>
+                </div>
                 <ul class="list-group list-group-flush myArticle" th:if="${not #lists.isEmpty(arts.value)}">
-                    <a th:each="art : ${arts.value}" th:href="${'/article/' + art.id}">
-                        <li class="list-group-item" th:text="${art.title}">this is article title</li></a>
+                        <li class="list-group-item" th:each="art : ${arts.value}">
+                            <a style="width: 90%;min-width: 330px;float: left" th:href="${'/article/' + art.id}" th:text="${art.title}"></a>
+                            <span style="width: 10%;min-width:40px;float: right" th:text="${#dates.format(art.publish_time, 'MM/dd')}">MM/dd </span>
+                        </li>
                 </ul>
             </div>
         </div>

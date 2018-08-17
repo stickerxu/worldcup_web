@@ -3,6 +3,8 @@ package com.worldcup.web.controller.blog;
 import com.worldcup.web.Constants;
 import com.worldcup.web.entity.Article;
 import com.worldcup.web.service.ArticleService;
+import com.worldcup.web.service.ArticleTypeService;
+import com.worldcup.web.util.ParameterUtil;
 import com.worldcup.web.util.ResponsePageUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.jsoup.Jsoup;
@@ -17,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 
 @Controller
 @Slf4j
@@ -24,6 +27,9 @@ import java.io.IOException;
 public class AticleController {
     @Autowired
     private ArticleService articleService;
+    @Autowired
+    private ArticleTypeService articleTypeService;
+
     @Value("${web.article.path.dev}")
     private String webArticlePath;
 
@@ -31,7 +37,8 @@ public class AticleController {
     public String article(@PathVariable("id") Integer id, ModelMap modelMap) {
         Article article = articleService.getArticleById(id);
         if (article == null) {
-            return ResponsePageUtil.errorPage("参数有误！", modelMap);
+            modelMap.put("message", "参数有误！");
+            return ResponsePageUtil.errorPage(modelMap);
         }
         try {
             StringBuilder pathBuilder = new StringBuilder();
@@ -50,5 +57,19 @@ public class AticleController {
             log.error(e.getMessage(), e);
         }
         return null;
+    }
+
+    @GetMapping("/more/{type:\\d+}")
+    public String artMore(@PathVariable("type") Integer type, ModelMap modelMap) {
+        String name = articleTypeService.getNameById(type);
+        if (ParameterUtil.isNotBlank(name)) {
+            modelMap.put("articleTypeName", name);
+        } else {
+            modelMap.put("message", "操作有误！");
+            return ResponsePageUtil.errorPage(modelMap);
+        }
+        List<Article> articles = articleService.listArticleByType(type);
+        modelMap.put(Constants.MODEL_MAP_PAGE, articles);
+        return "article/list";
     }
 }

@@ -14,6 +14,8 @@
     <script th:src="@{/webjars/jquery/3.3.1-1/jquery.min.js}"></script>
     <script th:src="@{/webjars/bootstrap/4.1.1/js/bootstrap.bundle.min.js}"></script>
     <script th:src="@{/webjars/bootstrap/4.1.1/js/bootstrap.min.js}"></script>
+    <script th:src="@{/static/js/L2Dwidget.0.min.js}"></script>
+    <script th:src="@{/static/js/L2Dwidget.min.js}"></script>
     <style>
         body {
             width: 100%;
@@ -51,15 +53,37 @@
                 $('body').animate({scrollTop: 0}, 500);
                 return false;
             });
+            //right cute girl
+            L2Dwidget.init({
+                "model": {"scale": 1, "hHeadPos": 0.5, "vHeadPos": 0.618},
+                "display": {
+                    "superSample": 2,
+                    "width": 90,
+                    "height": 200,
+                    "bottom": 20,
+                    "position": "right",
+                    "hOffset": 0,
+                    "vOffset": -20
+                },
+                "mobile": {"show": true, "scale": 0.1},
+                "react": {"opacityDefault": 0.7, "opacityOnHover": 0.2},
+                "pluginRootPath": "live2dw/"
+
+            });
         })
     </script>
 </head>
 <body>
 <div th:replace="fragments/navigator :: navigator"></div>
-<div class="clearfix t-space"></div>
+<div class="t-space"></div>
 <div layout:fragment="content"></div>
-<button id="backTop" class="btn btn-outline-primary position-fixed" style="right: 0;bottom: 2rem">返回顶部</button>
-<footer class="clearfix text-center">
+<button id="backTop" class="btn btn-outline-primary btn-sm position-fixed" style="right: 12rem;bottom: 2rem">返回顶部</button>
+<div class="t-space"></div>
+<!--cute girl-->
+<div id="live2d-widget">
+    <canvas id="live2dcanvas"></canvas>
+</div>
+<footer class="text-center">
     <hr>
     &copy; 2018 - 2019 WorldCup.Inc
 </footer>

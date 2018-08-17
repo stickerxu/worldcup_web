@@ -28,7 +28,8 @@ public class BreakWallController {
         LoginUser user = (LoginUser) request.getSession().getAttribute("user");
         String msg = "";
         if (user == null) {
-            return ResponsePageUtil.errorPage("请登录！", modelMap);
+            modelMap.put("message", "请登录！");
+            return ResponsePageUtil.errorPage(modelMap);
         }
         //校验当前用户邀请是否有效
         if (StringUtils.isBlank(invest_code) || !invest_code.equals(user.getInvest_code())) {

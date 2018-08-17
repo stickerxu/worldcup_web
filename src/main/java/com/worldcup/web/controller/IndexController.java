@@ -11,6 +11,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -25,9 +26,9 @@ public class IndexController {
     @GetMapping({"/",""})
     public String index(ModelMap modelMap) {
         //查询所有文章类型
-        List<ArticleType> types = articleTypeService.listAll();
+        List<ArticleType> types = articleTypeService.listIdAndNameByStatusLimitNum();
         //查询所有文章类型对应的最新10篇文章
-        Map<String, Object> articleMap = new HashMap<>();
+        Map<String, Object> articleMap = new LinkedHashMap<>();
         List<Article> articles;
         //将每种类型名称及对应文章放入map中
         for (ArticleType type : types) {

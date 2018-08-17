@@ -10,15 +10,9 @@ public interface ArticleMapper {
     /*前台*/
     List<Article> listTopTenArticleByType(Integer type);
 
-    /*后台*/
-    void saveArticle(Article article);
+    List<Article> listArticleByType(Integer type);
 
-    Integer getMaxArticleIdByType(Integer type);
+    Integer countArticleByType(Article article);
 
-    List<Article> listArticleByCriteria(Article article);
-
-    Integer countArticleByCriteria(Article article);
-
-    /*公共*/
     Article getArticleById(Integer id);
 }

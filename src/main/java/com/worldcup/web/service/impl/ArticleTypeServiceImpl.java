@@ -12,8 +12,14 @@ import java.util.List;
 public class ArticleTypeServiceImpl implements ArticleTypeService {
     @Autowired
     private ArticleTypeMapper articleTypeMapper;
+
     @Override
-    public List<ArticleType> listAll() {
-        return articleTypeMapper.listAll();
+    public List<ArticleType> listIdAndNameByStatusLimitNum() {
+        return articleTypeMapper.listIdAndNameByStatusLimitNum();
+    }
+
+    @Override
+    public String getNameById(Integer id) {
+        return articleTypeMapper.getNameById(id);
     }
 }
