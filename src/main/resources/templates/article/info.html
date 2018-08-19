@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="/webjars/highlightjs/9.8.0/styles/default.min.css">
     <style>
         .container {
-            width: 900px;
+            max-width: 900px;
         }
         #inHtml pre {
             background-color: lightyellow;
@@ -21,6 +21,9 @@
         #inHtml,#inHtml h1,#inHtml h2,#inHtml h3,#inHtml h4,#inHtml h5,#inHtml h6 {
             line-height: 2rem;
         }
+        #inHtml h1,#inHtml h2,#inHtml h3,#inHtml h4,#inHtml h5,#inHtml h6 {
+            margin-bottom: 20px;
+        }
     </style>
 </head>
 <body>
@@ -28,7 +31,7 @@
 
     <h2 th:text="${article.title}">this is article's title</h2>
     <hr>
-    <div class="row">
+    <div class="row mb-4">
         <p class="col"><strong th:text="${'作者：' + article.author}">作者：author</strong></p>
         <p class="col text-right"><samp th:text="${article.publish_time == null ?
                 '发布时间：' + #dates.format(article.create_time, 'yyyy-MM-dd HH:mm:ss') :
