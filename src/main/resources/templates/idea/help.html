@@ -13,7 +13,7 @@
 <body>
 <div class="container">
     <h3>使用帮助</h3>
-    <h4>Licenese Server方式激活IDEA</h4>
+    <h4 id="way1">Licenese Server方式激活IDEA</h4>
     <hr>
     <p>
         <mark>打开IDEA菜单：Help -&gt; Register -&gt; Licenese Server -&gt; 输入：
@@ -22,9 +22,25 @@
         </mark>
         <br></p>
     <img src="http://idea.wannacorn.com/pic/example1.png" alt="例图1">
-    <h4>破解补丁激活</h4>
+    <h4 id="way2">注册服务器激活</h4>
     <hr>
-    <p>第一步，下载破解补丁：JetbrainsCrack-3.1-release-enc.jar&nbsp;<a href="/lib/JetbrainsCrack-3.1-release-enc.jar">下载</a><br>第二步，将补丁包放到指定目录下，比如
+    <ol>
+        <li>先下载 jetbrains-agent.jar&nbsp;(<a href="/lib/jetbrains-agent.jar" target="_blank">下载</a>)，把它放到你认为合适的文件夹内。</li>
+        <li>点击你要注册的IDE菜单：&quot;Help&quot; -&gt; &quot;Edit Custom VM Options ...&quot;
+            如果提示是否要创建文件，请点&quot;是|Yes&quot;。</li>
+        <li>在打开的vmoptions编辑窗口末行添加：&quot;-javaagent:{JetbrainsAgentJarPath}&quot;
+            最好使用绝对路径。
+            如: -javaagent:$USER_HOME/jetbrains-agent.jar</li>
+        <li>重启你的IDE。</li>
+        <li>注册选择License server方式，地址填入：
+            http://[随意填一个域名，要求共16个字符（不要有:&#39;/&#39;, &#39;[&#39;, &#39;]&#39;）]</li>
+        <li>如果提示错误:
+            &quot;Error opening zip file or JAR manifest missing : jetbrains-agent.jar&quot;
+            这种情况请试着填上jar文件的绝对路径.</li>
+    </ol>
+    <h4 id="way3">破解补丁激活</h4>
+    <hr>
+    <p>第一步，下载破解补丁：JetbrainsCrack-3.1-release-enc.jar&nbsp;(<a href="/lib/JetbrainsCrack-3.1-release-enc.jar" target="_blank">下载</a>)<br>第二步，将补丁包放到指定目录下，比如
         D:/JetbrainsCrack-3.1-release-enc.jar<br>第三步，打开IDEA菜单：Help
         -&gt; Edit Custom VM Options... -&gt; 最下方增加：-javaagent:D:/JetbrainsCrack-2.6.2.jar
         <mark><strong>注意开头"-"</strong></mark>

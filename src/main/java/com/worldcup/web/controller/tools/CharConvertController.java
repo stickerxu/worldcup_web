@@ -1,14 +1,16 @@
-package com.worldcup.web.controller.charconvert;
+package com.worldcup.web.controller.tools;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @Slf4j
+@RequestMapping("/tools/charConvert")
 public class CharConvertController {
-    @GetMapping("/charConvert")
+    @GetMapping({"","/"})
     public String charConver() {
-        return "charConvert/char_convert_index";
+        return "tools/charConvert/index";
     }
 }

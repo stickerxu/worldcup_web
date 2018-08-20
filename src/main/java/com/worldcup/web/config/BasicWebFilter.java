@@ -1,5 +1,6 @@
 package com.worldcup.web.config;
 
+import com.worldcup.web.Constants;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
@@ -27,8 +28,8 @@ public class BasicWebFilter implements Filter {
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
         HttpServletRequest req = (HttpServletRequest) request;
         HttpServletResponse res = (HttpServletResponse) response;
-        req.setCharacterEncoding("UTF-8");
-        res.setCharacterEncoding("UTF-8");
+        req.setCharacterEncoding(Constants.CHARSET_UTF_8);
+        res.setCharacterEncoding(Constants.CHARSET_UTF_8);
         chain.doFilter(request, response);
     }
 

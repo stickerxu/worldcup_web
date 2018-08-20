@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{fragments/layout}"
+      lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>我要加密</title>
+</head>
+<body>
+<div layout:fragment="content" class="container">
+    <h2>我要加密</h2>
+    <hr>
+    <div>
+        <form id="encrypForm" action="/tools/encryp/encrypSub" method="post">
+            <div class="form-group row">
+                <label for="encryp_content" class="col-form-label col-sm-1">加密内容</label>
+                <input name="encryp_content" id="encryp_content" class="form-control col-sm-5" th:value="${encryp_content}" required>
+                <label class="col-form-label col-sm-1">盐加密</label>
+                <select name="is_salt" class="form-control col-sm-1">
+                    <option value="0" th:selected="${is_salt == 0}">否</option>
+                    <option value="1" th:selected="${is_salt == 1}">是</option>
+                </select>
+            </div>
+            <fieldset class="form-group">
+                <div class="row">
+                    <legend class="col-form-label col-sm-1 pt-0">加密方法</legend>
+                    <div class="col-sm-10">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="encryp_method" id="encryp_method1" value="md5"
+                                   th:checked="${encryp_method == 'md5'}">
+                            <label class="form-check-label" for="encryp_method1">
+                                MD5
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="encryp_method" id="encryp_method2" value="sha1"
+                                   th:checked="${encryp_method == 'sha1'}">
+                            <label class="form-check-label" for="encryp_method2">
+                                SHA1
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="encryp_method" id="encryp_method3" value="sha2"
+                                   th:checked="${encryp_method == 'sha2'}">
+                            <label class="form-check-label" for="encryp_method3">
+                                SHA2
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+            <button class="btn btn-primary">确定</button>
+        </form>
+        <div class="mt-3" th:if="${result != null}">
+            <h3>加密结果</h3>
+            <hr>
+            <table th:if="${encryp_method == 'md5'}" class="table table-bordered table-striped table-sm w-75">
+                <tr th:if="${salt != null}">
+                    <th>密码盐</th>
+                    <td th:text="${salt}"></td>
+                </tr>
+                <tr>
+                    <th>32位小写</th>
+                    <td th:text="${result}"></td>
+                </tr>
+                <tr>
+                    <th>32位大写</th>
+                    <td th:text="${#strings.toUpperCase(result)}"></td>
+                </tr>
+                <tr>
+                    <th>16位小写</th>
+                    <td th:text="${#strings.substring(result,8,24)}"></td>
+                </tr>
+                <tr>
+                    <th>16位大写</th>
+                    <td th:text="${#strings.substring(result,8,24).toUpperCase()}"></td>
+                </tr>
+            </table>
+            <table th:if="${encryp_method == 'sha1' || encryp_method == 'sha2'}" class="table table-bordered table-striped table-sm w-75">
+                <tr th:if="${salt != null}">
+                    <th>密码盐</th>
+                    <td th:text="${salt}"></td>
+                </tr>
+                <tr>
+                    <th th:text="${encryp_method == 'sha1' ? '40位小写' : '64位小写'}"></th>
+                    <td th:text="${result}"></td>
+                </tr>
+                <tr>
+                    <th th:text="${encryp_method == 'sha1' ? '40位大写' : '64位大写'}"></th>
+                    <td th:text="${#strings.toUpperCase(result)}"></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+</body>
+</html>

@@ -57,7 +57,7 @@ public class LoginUserController {
                 response.sendRedirect("/login");
                 return;
             }
-            String newPassword = EncrptionUtil.md5(loginUser.getUsername() + new_password).get(EncrptionUtil.MD5_32_BIT);
+            String newPassword = EncrptionUtil.md5(loginUser.getUsername() + new_password);
             loginUser.setPassword(newPassword);
             loginUserService.updateLoginUserPasswordById(loginUser);
             writer.write("<script>alert('修改成功！');history.back();</script>");
@@ -71,7 +71,7 @@ public class LoginUserController {
     private boolean verifyPassword(String password, LoginUser loginUser) throws UnsupportedEncodingException, NoSuchAlgorithmException {
         String inputPass = loginUser.getUsername() + password;
         String daoPass = loginUser.getPassword();
-        if (EncrptionUtil.md5(inputPass).get(EncrptionUtil.MD5_32_BIT).equals(daoPass)) {
+        if (EncrptionUtil.md5(inputPass).equals(daoPass)) {
             return true;
         }
         return false;

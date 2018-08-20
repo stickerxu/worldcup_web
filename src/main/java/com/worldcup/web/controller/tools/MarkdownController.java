@@ -1,4 +1,4 @@
-package com.worldcup.web.controller.markdown;
+package com.worldcup.web.controller.tools;
 
 import com.worldcup.web.entity.LoginUser;
 import com.worldcup.web.util.DownloadUtil;
@@ -15,12 +15,12 @@ import java.io.PrintWriter;
 
 @Controller
 @Slf4j
-@RequestMapping("/markdown")
+@RequestMapping("/tools/markdown")
 public class MarkdownController {
 
     @GetMapping("")
     public String markdown() {
-        return "markdown/editor";
+        return "tools/markdown/editor";
     }
 
     @PostMapping("/expHtml")
