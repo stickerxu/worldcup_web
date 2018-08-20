@@ -1,4 +1,4 @@
-package com.worldcup.web.controller.encryption;
+package com.worldcup.web.controller.tools;
 
 import com.worldcup.web.util.EncrptionUtil;
 import lombok.extern.slf4j.Slf4j;
@@ -7,6 +7,7 @@ import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.io.UnsupportedEncodingException;
@@ -14,12 +15,13 @@ import java.security.NoSuchAlgorithmException;
 
 @Controller
 @Slf4j
+@RequestMapping("/tools/encryp")
 public class EncryptionController {
-    @GetMapping("/encryp")
+    @GetMapping({"","/"})
     public String encryp(Model model) {
         model.addAttribute("encryp_method", "md5");
         model.addAttribute("is_salt", 0);
-        return "encryption/encryption";
+        return "tools/encryption/encryption";
     }
 
     @PostMapping("/encrypSub")
@@ -30,7 +32,9 @@ public class EncryptionController {
             modelMap.put("encryp_method",encryp_method);
             modelMap.put("is_salt",is_salt);
             if (is_salt == 1) {
-                encryp_content = encryp_content + EncrptionUtil.generateSalt(64);
+                String salt = EncrptionUtil.generateSalt(64);
+                encryp_content = encryp_content + salt;
+                modelMap.put("salt", salt);
             }
             switch (encryp_method) {
                 case "md5": modelMap.put("result", EncrptionUtil.md5(encryp_content));break;
@@ -38,7 +42,7 @@ public class EncryptionController {
                 case "sha2": modelMap.put("result", EncrptionUtil.sha256(encryp_content));break;
                 default:break;
             }
-            return "encryption/encryption";
+            return "tools/encryption/encryption";
         } catch (NoSuchAlgorithmException e) {
             log.error(e.getMessage(),e);
         } catch (UnsupportedEncodingException e) {

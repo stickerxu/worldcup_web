@@ -55,7 +55,7 @@ public class LoginController {
     private boolean verifyPassword(String password, LoginUser loginUser) throws UnsupportedEncodingException, NoSuchAlgorithmException {
         String inputPass = loginUser.getUsername() + password;
         String daoPass = loginUser.getPassword();
-        if (EncrptionUtil.md5(inputPass).get(EncrptionUtil.MD5_32_BIT).equals(daoPass)) {
+        if (EncrptionUtil.md5(inputPass).equals(daoPass)) {
             return true;
         }
         return false;
@@ -130,7 +130,7 @@ public class LoginController {
             return "redirect:/login";
         }
         try {
-            user.setPassword(EncrptionUtil.md5(user.getUsername() + password).get(EncrptionUtil.MD5_32_BIT));
+            user.setPassword(EncrptionUtil.md5(user.getUsername() + password));
         } catch (NoSuchAlgorithmException e) {
             log.error(e.getMessage(), e);
         } catch (UnsupportedEncodingException e) {
