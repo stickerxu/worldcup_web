@@ -5,26 +5,39 @@
 <head>
     <meta charset="UTF-8">
     <title>在线进制转换</title>
-    <!--javascript下的进制转换非常方便，系统已经提供内置方法，提供2～36进制间的转型。直接提供表示的有8进制、10进制、16进制。
+    <script>
+        $(function () {
+            $(":radio,#sourceSelect,#targetSelect,#inputNumber").on('change keydown',function () {
+                var num = $('#inputNumber').val();
+                var s_radix = $(":radio[name='sourceRadix']:checked").val();
+                var t_radix = $(":radio[name='targetRadix']:checked").val();
+                var id = $(this).attr("id");
+                if (id == 'sourceSelect' || id == 'inputNumber') {
+                    $(":radio[name='sourceRadix']:checked").prop("checked", false);
+                    s_radix = $('#sourceSelect').val();
+                }
+                if (id == 'targetSelect') {
+                    $(":radio[name='targetRadix']:checked").prop("checked", false);
+                    t_radix = $('#targetSelect').val();
+                }
+                if (num == '') {
+                    return false;
+                }
+                var r_num = anyToAny(num, s_radix, t_radix);
+                $('#resultNumber').val(r_num);
+            });
+            function anyToAny(num, sourceRadix, targetRadix) {
+                return tenToAny(anyToTen(num, sourceRadix), targetRadix);
+            }
+            function tenToAny(num, radix) {
+                return num.toString(radix);
+            }
+            function anyToTen(num, radix) {
+                return parseInt(num, radix);
+            }
 
-
-var w=function(s){document.write('<br>'+s)};
-
-//十进制转其他
-var x=110;
-w(x);
-w(x.toString(8));
-w(x.toString(32));
-w(x.toString(16));
-
-//其他转十进制
-var x='110';
-w(parseInt(x,2));
-w(parseInt(x,8));
-w(parseInt(x,16));
-
-//其他转其他
-//先用parseInt转成十进制再用toString转到目标进制 -->
+        })
+    </script>
 </head>
 <body>
 <div layout:fragment="content" class="container">
@@ -55,8 +68,8 @@ w(parseInt(x,16));
             </div>
             <div class="form-row col-sm-4">
                 <label class="col-form-label col-sm-3">进制选择</label>
-                <select class="form-control-sm col-sm-3 mt-1">
-                    <option th:each="i : ${#numbers.sequence(2,32)}" th:text="${i + '进制'}" th:selected="${i == 10}"></option>
+                <select class="form-control-sm col-sm-3 mt-1" id="sourceSelect">
+                    <option th:each="i : ${#numbers.sequence(2,32)}" th:text="${i + '进制'}" th:selected="${i == 10}" th:value="${i}"></option>
                 </select>
             </div>
         </div>
@@ -91,8 +104,8 @@ w(parseInt(x,16));
             </div>
             <div class="form-row col-sm-4">
                 <label class="col-form-label col-sm-3">进制选择</label>
-                <select class="form-control-sm col-sm-3 mt-1">
-                    <option th:each="i : ${#numbers.sequence(2,32)}" th:text="${i + '进制'}" th:selected="${i == 16}"></option>
+                <select class="form-control-sm col-sm-3 mt-1" id="targetSelect">
+                    <option th:each="i : ${#numbers.sequence(2,32)}" th:text="${i + '进制'}" th:selected="${i == 16}" th:value="${i}"></option>
                 </select>
             </div>
         </div>
@@ -101,7 +114,7 @@ w(parseInt(x,16));
                 <div class="input-group-prepend">
                     <span class="input-group-text">转换结果</span>
                 </div>
-                <input type="text" class="form-control" id="resultNumber" placeholder="转换结果">
+                <input type="text" class="form-control" style="background-color: whitesmoke" id="resultNumber" placeholder="转换结果" readonly>
             </div>
         </div>
     </form>
