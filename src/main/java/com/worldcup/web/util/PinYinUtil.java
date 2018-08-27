@@ -10,29 +10,32 @@ import net.sourceforge.pinyin4j.format.exception.BadHanyuPinyinOutputFormatCombi
 public class PinYinUtil {
     public static final int CASE_LOW = 0;
     public static final int CASE_UP = 1;
+    public static final int CASE_FIRST_UP = 1;
     public static final int TONE_NUMBER = 0;
     public static final int TONE_NONE = 1;
     public static final int TONE_MARK = 2;
     public static final int CHAR_U_COLON = 0;
     public static final int CHAR_V = 1;
     public static final int CHAR_U = 2;
+    public static final String SEPARATE_NONE = "";
+    public static final String SEPARATE_BLANK = " ";
 
     //汉字转拼音
     public static String hanZiZhuanPinYin(String content) throws BadHanyuPinyinOutputFormatCombination {
-        return hanZiZhuanPinYin(content, CASE_LOW, TONE_NONE, CHAR_U);
+        return hanZiZhuanPinYin(content, CASE_LOW, TONE_NONE, CHAR_U, SEPARATE_BLANK);
     }
 
-    public static String hanZiZhuanPinYin(String content, int pyCase, int pyTone, int pyWithU) throws BadHanyuPinyinOutputFormatCombination {
+    public static String hanZiZhuanPinYin(String content, Integer pyCase, Integer pyTone, Integer pyWithU, String pySeparate) throws BadHanyuPinyinOutputFormatCombination {
         if (ParameterUtil.isBlank(content)) {
             return null;
         }
-        return PinyinHelper.toHanYuPinyinString(content, pinYinFormat(pyCase, pyTone, pyWithU), " ", true);
+        return PinyinHelper.toHanYuPinyinString(content, pinYinFormat(pyCase, pyTone, pyWithU), pySeparate, true);
     }
 
 
 
     //大小写、有无声调、ü|v
-    private static HanyuPinyinOutputFormat pinYinFormat(int pyCase, int pyTone, int pyWithU) {
+    private static HanyuPinyinOutputFormat pinYinFormat(Integer pyCase, Integer pyTone, Integer pyWithU) {
         HanyuPinyinCaseType caseType;
         HanyuPinyinToneType toneType;
         HanyuPinyinVCharType charType;

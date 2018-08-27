@@ -41,11 +41,11 @@
             <div class="form-row mb-3">
                 <div class="col-sm-6 text-right mt-1">
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="pyCase" id="pyCase1" value="1" checked>
+                        <input class="form-check-input" type="radio" name="pyCase" id="pyCase1" value="0" checked>
                         <label class="form-check-label" for="pyCase1">小写</label>
                     </div>
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="pyCase" id="pyCase2" value="0">
+                        <input class="form-check-input" type="radio" name="pyCase" id="pyCase2" value="1">
                         <label class="form-check-label" for="pyCase2">大写</label>
                     </div>
                     <div class="form-check form-check-inline">
@@ -56,10 +56,18 @@
                 <div class="col-sm-1">
                     <button type="button" class="btn btn-success btn-sm" onclick="pyConvert()">转换为拼音</button>
                 </div>
-                <div class="col-sm-2 mt-1 ml-2">
-                    <div class="form-check">
+                <div class="col-sm-4 mt-1 ml-2">
+                    <div class="form-check form-check-inline">
                         <input class="form-check-input" type="checkbox" value="1" name="pyTone" id="pyTone">
                         <label class="form-check-label" for="pyTone">标注声调</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" value="1" name="pySeparate" id="pySeparate" checked>
+                        <label class="form-check-label" for="pySeparate">空格分隔</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" value="1" name="pyWithV" id="pyWithV">
+                        <label class="form-check-label" for="pyWithV">ü转为V</label>
                     </div>
                 </div>
             </div>
