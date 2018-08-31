@@ -34,7 +34,7 @@ public class RegistryController {
         LoginUser user = loginUserService.getUserByUsername(username);
         if (user != null) {
             model.addAttribute("message", "用户名重复啦~ 亲，请换个更有个性的用户名！");
-            return "error";
+            return "error/error";
         }
         String password = loginUser.getPassword();
         try {
