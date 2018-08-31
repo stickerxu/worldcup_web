@@ -7,7 +7,7 @@ import java.io.IOException;
 
 public class ResponsePageUtil {
     public static String errorPage(ModelMap modelMap) {
-        return "error";
+        return "error/error";
     }
     public static String successPage(ModelMap modelMap) {
         return "success";

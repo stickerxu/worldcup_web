@@ -42,7 +42,6 @@ dependencies {
     compile('org.jsoup:jsoup:1.11.3')
     compile('com.belerweb:pinyin4j:2.5.1')
 
-
     runtime('mysql:mysql-connector-java')
     compileOnly('org.projectlombok:lombok')
     testCompile('org.springframework.boot:spring-boot-starter-test')

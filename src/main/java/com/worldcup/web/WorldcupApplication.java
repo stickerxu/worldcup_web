@@ -5,8 +5,11 @@ import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.web.servlet.error.ErrorController;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
@@ -44,7 +47,19 @@ public class WorldcupApplication {
 
         @Override
         public void addViewControllers(ViewControllerRegistry registry) {
+            registry.addViewController("/err").setViewName("/asdas");
+        }
+    }
 
+    @Controller
+    class ErrController implements ErrorController {
+        @Override
+        public String getErrorPath() {
+            return "error/error";
+        }
+        @RequestMapping("/error")
+        public String error() {
+            return getErrorPath();
         }
     }
 }

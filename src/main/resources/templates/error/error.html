@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{fragments/layout}"
+      lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>出错啦~！</title>
+</head>
+<body>
+<div layout:fragment="content" class="container">
+    <h2>服务器开小差了T_T 请稍后再试~</h2>
+    <hr>
+    <p th:text="${message == null ? '500 - There is a error in server.' : message}"></p>
+</div>
+</body>
+</html>

@@ -38,7 +38,19 @@
                 '发布时间：' + #dates.format(article.publish_time, 'yyyy-MM-dd HH:mm:ss')}">
             发布时间：yyyy-MM-dd HH:mm:ss</samp></p>
     </div>
-    <div id="inHtml" th:utext="${includeHtml}"></div>
+    <div id="inHtml" th:utext="${includeHtml}" class="mb-5"></div>
+    <hr>
+    <div id="disqus_thread" class="text-center">评论区目前仅只对国外用户开放。</div>
+    <script>
+        (function() {
+            var d = document, s = d.createElement('script');
+            s.src = 'https://wannacorn.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+        })();
+
+    </script>
+    <noscript>Please enable JavaScript to view the comments.</noscript>
 </div>
 </body>
 </html>
