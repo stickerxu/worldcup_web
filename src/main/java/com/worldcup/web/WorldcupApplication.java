@@ -26,7 +26,6 @@ public class WorldcupApplication {
     }
 
     @Configuration
-    @PropertySource("classpath:application.properties")
     class WorldcupMvcConfig implements WebMvcConfigurer {
 
         @Autowired
