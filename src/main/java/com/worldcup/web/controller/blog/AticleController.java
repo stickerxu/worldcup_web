@@ -43,7 +43,7 @@ public class AticleController {
         try {
             StringBuilder pathBuilder = new StringBuilder();
             pathBuilder.append(webArticlePath).append(File.separator).append(article.getType())
-                    .append(File.separator).append(article.getFile_name());
+                    .append(File.separator).append(article.getFileName());
             Document artDoc = Jsoup.parse(new File(pathBuilder.toString()), Constants.CHARSET_UTF_8, Constants.WEB_URL);
             String script = artDoc.head().select("script").outerHtml();
             String style = artDoc.head().select("style").outerHtml();

@@ -16,17 +16,19 @@
                 $('#resultMsg').removeClass("d-none");
 
             }
-            //验证邀请码 (通过回调出发提交表单隐藏按钮，既可以触发表单验证，也可以校验验证码，还可以防止get请求跳转直接暴露getInfo页面)
-            $('#verifyButton').click(function () {
-                $.get("/breakwall/verifyCode", {invest_code:$('#invest_code').val()}, function (data) {
-                    if (data == "") {
-                        $('#subButton').click();
-                    } else {
-                        $('#message').text(data);
-                    }
-                });
+
+        });
+        //验证邀请码 (通过回调触发提交表单隐藏按钮，既可以触发表单验证，也可以校验验证码，还可以防止get请求跳转直接暴露getInfo页面)
+        function verifyCode() {
+            $.get("/breakwall/verifyCode", {investCode:$('#investCode').val()}, function (data) {
+                if (data == "") {
+                    $('#subButton').click();
+                } else {
+                    $('#message').text(data);
+                }
             });
-        })
+        }
+
     </script>
 </head>
 <body>
@@ -40,7 +42,7 @@
             </div>
             <div class="form-group row">
                 <div class="col-md-4">
-                    <input class="form-control" id="invest_code" name="invest_code" maxlength="16" minlength="16"
+                    <input class="form-control" id="investCode" name="investCode" maxlength="16" minlength="16"
                            placeholder="请输入16位邀请码" required>
                     <div id="resultMsg" class="alert alert-success mt-1 d-none" role="alert"></div>
                 </div>
@@ -51,7 +53,7 @@
                 </div>
             </div>
             <button id="subButton" class="d-none"></button>
-            <button type="button" id="verifyButton" class="btn btn-primary">确定</button>
+            <button type="button" onclick="verifyCode()" class="btn btn-primary">确定</button>
         </form>
     </div>
 </div>

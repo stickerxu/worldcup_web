@@ -108,7 +108,7 @@ public class LoginController {
             return "redirect:/login/findPass";
         }
         if (StringUtils.isBlank(user_email) || StringUtils.isBlank(user_phone) ||
-                !user.getUser_email().equals(user_email) || !user.getUser_phone().equals(user_phone)) {
+                !user.getUsername().equals(user_email) || !user.getUserPhone().equals(user_phone)) {
             request.getSession().setAttribute("resultMsg", "邮箱或手机号输入有误！");
             return "loginuser/find_pass_next";
         }

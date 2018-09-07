@@ -37,7 +37,7 @@
             <tr th:each="art : ${pageList}">
                 <td class="row m-0">
                     <a class="col-md-8 p-0" th:href="${'/article/' + art.id}" th:text="${art.title}" target="_blank">文章标题1...</a>
-                    <span class="col-md-4 p-0 text-right" th:text="${#dates.format(art.publish_time, 'yyyy-MM-dd')}">yyyy-MM-dd</span>
+                    <span class="col-md-4 p-0 text-right" th:text="${#dates.format(art.publishTime, 'yyyy-MM-dd')}">yyyy-MM-dd</span>
                 </td>
             </tr>
         </table>

@@ -16,8 +16,8 @@ public class Article extends BaseEntity implements Serializable {
     private Integer status = 1;
     private String author = "";
     private String title;
-    private String file_name;
+    private String fileName;
     private Integer weight = 0;
-    private Date publish_time;
-    private Date create_time;
+    private Date publishTime;
+    private Date createTime;
 }

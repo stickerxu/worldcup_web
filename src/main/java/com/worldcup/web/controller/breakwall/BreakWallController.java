@@ -24,7 +24,7 @@ public class BreakWallController {
 
     @GetMapping("/breakwall/verifyCode")
     public @ResponseBody String verifyCode(HttpServletRequest request, ModelMap modelMap) {
-        String invest_code = request.getParameter("invest_code");
+        String investCode = request.getParameter("investCode");
         LoginUser user = (LoginUser) request.getSession().getAttribute("user");
         String msg = "";
         if (user == null) {
@@ -32,14 +32,8 @@ public class BreakWallController {
             return ResponsePageUtil.errorPage(modelMap);
         }
         //校验当前用户邀请是否有效
-        if (StringUtils.isBlank(invest_code) || !invest_code.equals(user.getInvest_code())) {
+        if (StringUtils.isBlank(investCode) || !investCode.equals(user.getInvestCode())) {
             msg = "无效的邀请码";
-            return msg;
-        }
-        // 注册时间超过一周，邀请码失效
-        int compare = DateTimeUtil.compareTo(DateTimeUtil.plusWeeks(user.getRegistry_time(), 1), DateTimeUtil.now());
-        if (compare == -1) {
-            msg = "邀请码已失效";
             return msg;
         }
         return msg;
@@ -57,6 +51,6 @@ public class BreakWallController {
             log.error("{} 登陆超时, 访问地址：{};", user.getUsername(), request.getRequestURI());
             return "登陆超时！";
         }
-        return user.getInvest_code();
+        return user.getInvestCode();
     }
 }
