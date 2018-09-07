@@ -21,9 +21,9 @@ public class WorldcupApplicationTests {
         LoginUser loginUser = new LoginUser();
         loginUser.setUsername("stickertest");
         loginUser.setPassword("1591655");
-        loginUser.setUser_email("");
-        loginUser.setInvest_code("");
-        loginUser.setUser_phone("");
+        loginUser.setUserEmail("");
+        loginUser.setInvestCode("");
+        loginUser.setUserPhone("");
         loginUserService.insertLoginUser(loginUser);
     }
 

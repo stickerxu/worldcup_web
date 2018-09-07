@@ -41,7 +41,7 @@ public class RegistryController {
             if (StringUtils.isNotBlank(username) && StringUtils.isNotBlank(password)) {
                 loginUser.setPassword(EncrptionUtil.md5(username + password));
             }
-            loginUser.setInvest_code(EncrptionUtil.md5(String.valueOf(EncrptionUtil.generateSalt(6))).substring(8,24).toUpperCase());
+            loginUser.setInvestCode(EncrptionUtil.md5(String.valueOf(EncrptionUtil.generateSalt(6))).substring(8,24).toUpperCase());
             loginUserService.insertLoginUser(loginUser);
             model.addAttribute("user", loginUser);
             return "loginuser/registry_success";

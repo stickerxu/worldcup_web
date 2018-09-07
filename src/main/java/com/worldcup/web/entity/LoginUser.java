@@ -15,11 +15,11 @@ public class LoginUser implements Serializable {
     private int id;
     private String username;
     private String password;
-    private String real_name; //注册时不填
+    private String realName; //注册时不填
     private Integer gender; //性别：0、女 1、男 2、保密
-    private String user_email;
-    private String user_phone;
-    private String invest_code; //注册时生成
-    private Date registry_time;
+    private String userEmail;
+    private String userPhone;
+    private String investCode; //注册时生成
+    private Date registryTime;
 
 }

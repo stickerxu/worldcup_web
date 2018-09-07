@@ -19,6 +19,7 @@
             background-color: darkcyan;
             color: whitesmoke;
             padding-bottom: 30px;
+            margin-bottom: 0;
         }
         #connectWayInfo > li a {
             color: lightgray;
@@ -88,6 +89,7 @@
             </ul>
         </div>
     </div>
+    <div style="height: 40px"></div>
     <div class="container">
         <div class="row" th:if="${not #lists.isEmpty(articleMap)}">
             <div th:each="arts, artStat : ${articleMap}" th:if="${not #lists.isEmpty(arts.value)}"
@@ -103,7 +105,7 @@
                 <ul class="list-group list-group-flush myArticle" th:if="${not #lists.isEmpty(arts.value)}">
                         <li class="list-group-item" th:each="art : ${arts.value}">
                             <a style="width: 90%;min-width: 330px;float: left" th:href="${'/article/' + art.id}" th:text="${art.title}"></a>
-                            <span style="width: 10%;min-width:40px;float: right" th:text="${#dates.format(art.publish_time, 'MM/dd')}">MM/dd </span>
+                            <span style="width: 10%;min-width:40px;float: right" th:text="${#dates.format(art.publishTime, 'MM/dd')}">MM/dd </span>
                         </li>
                 </ul>
             </div>
