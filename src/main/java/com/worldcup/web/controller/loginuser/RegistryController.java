@@ -3,6 +3,8 @@ package com.worldcup.web.controller.loginuser;
 import com.worldcup.web.entity.LoginUser;
 import com.worldcup.web.service.LoginUserService;
 import com.worldcup.web.util.EncrptionUtil;
+import com.worldcup.web.util.ParameterUtil;
+import com.worldcup.web.util.VerifyCodeUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +15,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.imageio.ImageIO;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
 
@@ -28,7 +36,19 @@ public class RegistryController {
     }
 
     @PostMapping("/registrySub")
-    public String registrySub(LoginUser loginUser, Model model) {
+    public String registrySub(@RequestParam("verifyCode") String verifyCode, LoginUser loginUser,
+                              HttpSession session, HttpServletResponse response, Model model) {
+        //验证码校验
+        String registryVerifyCode = (String) session.getAttribute("registryVerifyCode");
+        if (ParameterUtil.isBlank(registryVerifyCode) || !verifyCode.equalsIgnoreCase(registryVerifyCode)) {
+            response.setContentType("text/html;charset=UTF-8");
+            try {
+                response.getWriter().write("<script>history.go(-1);</script>");
+            } catch (IOException e) {
+                log.info(e.getMessage(), e);
+            }
+            return null;
+        }
         String username = loginUser.getUsername();
         //查重
         LoginUser user = loginUserService.getUserByUsername(username);
@@ -53,7 +73,7 @@ public class RegistryController {
         return null;
     }
 
-    @PostMapping("/registry/verify")
+    @PostMapping("/registry/verifyUsername")
     @ResponseBody
     public int verify(@RequestParam("username") String username) {
         int result = 0;
@@ -62,5 +82,20 @@ public class RegistryController {
             result = 1;
         }
         return result;
+    }
+
+    @GetMapping("/registry/getVerifyCode")
+    public void getVerifyCode(HttpServletResponse response, HttpSession session) {
+        Object[] objs = VerifyCodeUtil.createImage();
+        session.setAttribute("registryVerifyCode", String.valueOf(objs[0]));
+        log.info("图片验证码为：{}", session.getAttribute("registryVerifyCode"));
+        BufferedImage image = (BufferedImage) objs[1];
+        try {
+            response.setContentType("image/png");
+            OutputStream os = response.getOutputStream();
+            ImageIO.write(image, "png", os);
+        } catch (IOException e) {
+            log.error(e.getMessage(), e);
+        }
     }
 }

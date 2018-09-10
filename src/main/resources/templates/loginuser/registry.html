@@ -6,55 +6,75 @@
     <meta charset="UTF-8">
     <title>注册</title>
     <style>
-        #registryForm {
+        #registryDiv {
             width: 350px;
             margin: auto;
             padding-top: 200px;
         }
-
-        #verifyText {
-            display: none;
-            color: red;
-            font-size: small;
-            font-weight: bold;
-        }
-
-        #verifyResult {
-            display: none;
-            font-size: small;
-            font-weight: bold;
-        }
     </style>
     <script>
         $(function () {
+            var status;
             //异步校验用户名重复
             $('input[name=username]').blur(function () {
                 var username = $(this).val();
                 if (username != '') {
-                    $('#verifyText').show();
-                    $.post("/registry/verify", {username: $(this).val()}, verifyCallback);
+                    $(this).nextAll().remove();
+                    $(this).after("<span style='color:green;font-size: small;font-weight: bold'>检测中...</span>");
+                    $.post("/registry/verifyUsername", {username: $(this).val()}, verifyCallback);
+                }
+            });
+            function verifyCallback(data) {
+                $('#username').nextAll().remove();
+                if (data == 1) {
+                    status = 1;
+                    $('#username').after("<span style='color:green;font-size: small;font-weight: bold'>✔用户名可用</span>");
+                    $('#username').css("border-color", "green");
+                } else {
+                    status = 0;
+                    $('#username').after("<span style='color:red;font-size: small;font-weight: bold'>✘用户名已存在</span>");
+                    $('#username').css("border-color", "red");
+                }
+            }
+            //表单提交时校验 密码、验证码
+            $('#registryForm').submit(function () {
+                //校验密码
+                var pass = $('#password').val();
+                var passCf = $('#passwordConfirm').val();
+                $('#passwordConfirm').nextAll().remove();
+                if (pass != passCf) {
+                    $('#password').css("border-color", "red");
+                    $('#passwordConfirm').css("border-color", "red");
+                    $('#passwordConfirm').after("<span style='color:red;font-size: small;font-weight: bold'>✘两次输入不一致</span>");
+                    return false;
+                } else {
+                    $('#password').css("border-color", "green");
+                    $('#passwordConfirm').css("border-color", "green");
+                }
+                //校验验证码
+                /*$.get("/registry/verifyCode", {verifyCode : $('#verifyCode').val()}, function (data) {
+                    $('#verifyCode').nextAll().remove();
+                    $('#v_code').val(data);
+                    if (data == 0) {
+                        $('#verifyCode').css("border-color", "red");
+                        $('#verifyCode').after("<span style='color:red;font-size: small;font-weight: bold'>✘验证码错误</span>");
+                        $('#verifyCodeImg').attr('src', '/registry/getVerifyCode?' + Math.random());
+                    } else {
+                        $('#verifyCode').css("border-color", "green");
+                    }
+                });*/
+               if (status == 0) {
+                    return false;
                 }
             });
 
-            function verifyCallback(data) {
-                if (data == 1) {
-                    $('#verifyText').hide();
-                    $('#verifyResult').text("✔用户名可用");
-                    $('#verifyResult').css("color", "green");
-                } else {
-                    $('#verifyText').hide();
-                    $('#verifyResult').text("✘用户名已存在");
-                    $('#verifyResult').css("color", "red");
-                }
-                $('#verifyResult').show();
-            }
         })
     </script>
 </head>
 <body>
 <div layout:fragment="content">
-    <div id="registryForm">
-        <form th:action="@{/registrySub}" method="post">
+    <div id="registryDiv">
+        <form id="registryForm" th:action="@{/registrySub}" method="post">
             <div class="form-group text-center">
                 <h4>请注册</h4>
             </div>
@@ -63,11 +83,8 @@
                 <div class="col-sm-9">
                     <input class="form-control" id="username" name="username" minlength="2"
                            placeholder="请使用手机号或邮箱" required>
-                    <span id="verifyText">检测中...</span>
-                    <span id="verifyResult"></span>
                 </div>
             </div>
-            <!--TODO 两密码js验证， 验证码-->
             <div class="form-group row">
                 <label for="password" class="col-sm-3 col-form-label">登录密码</label>
                 <div class="col-sm-9">
@@ -76,10 +93,20 @@
                 </div>
             </div>
             <div class="form-group row">
-                <label for="password_confirm" class="col-sm-3 col-form-label">确认密码</label>
+                <label for="passwordConfirm" class="col-sm-3 col-form-label">确认密码</label>
                 <div class="col-sm-9">
-                    <input type="password" class="form-control" id="password_confirm" minlength="6"
+                    <input type="password" class="form-control" id="passwordConfirm" name="passwordConfirm" minlength="6"
                            placeholder="请至少输入6位" required>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="verifyCode" class="col-sm-3 col-form-label">验证码</label>
+                <div class="col-sm-4">
+                    <input class="form-control" id="verifyCode" name="verifyCode" minlength="4" maxlength="4"
+                           placeholder="验证码" required>
+                </div>
+                <div class="col-sm-4">
+                    <a href="javascript:void(0)" onclick="$('#verifyCodeImg').attr('src', '/registry/getVerifyCode?' + Math.random())"><img id="verifyCodeImg" src="/registry/getVerifyCode" width="100" height="40"></a>
                 </div>
             </div>
             <button class="btn btn-primary btn-block">立即注册</button>
