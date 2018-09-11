@@ -5,7 +5,7 @@
 <mapper namespace="com.worldcup.web.mapper.LoginUserMapper">
     <insert id="insertLoginUser" parameterType="LoginUser">
         insert into login_user(username, password, invest_code, registry_time)
-        values (#{username}, #{password}, #{invest_code}, now())
+        values (#{username}, #{password}, #{investCode}, now())
     </insert>
 
     <select id="getUserByUsername" parameterType="String" resultType="LoginUser">
@@ -18,17 +18,17 @@
             <if test="password != null and password !=''">
                 password = #{password},
             </if>
-            <if test="real_name != null and real_name !=''">
-                real_name = #{real_name},
+            <if test="realName != null and realName !=''">
+                real_name = #{realName},
             </if>
-            <if test="user_email != null and user_email !=''">
-                user_email = #{user_email},
+            <if test="userEmail != null and userEmail !=''">
+                user_email = #{userEmail},
             </if>
-            <if test="user_phone != null and user_phone !=''">
-                user_phone = #{user_phone},
+            <if test="userPhone != null and userPhone !=''">
+                user_phone = #{userPhone},
             </if>
-            <if test="invest_code != null and invest_code !=''">
-                invest_code = #{invest_code},
+            <if test="investCode != null and investCode !=''">
+                invest_code = #{investCode},
             </if>
         </set>
         where id = #{id}
