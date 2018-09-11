@@ -14,7 +14,6 @@
     </style>
     <script>
         $(function () {
-            var status;
             //异步校验用户名重复
             $('input[name=username]').blur(function () {
                 var username = $(this).val();
@@ -27,22 +26,31 @@
             function verifyCallback(data) {
                 $('#username').nextAll().remove();
                 if (data == 1) {
-                    status = 1;
                     $('#username').after("<span style='color:green;font-size: small;font-weight: bold'>✔用户名可用</span>");
                     $('#username').css("border-color", "green");
                 } else {
-                    status = 0;
                     $('#username').after("<span style='color:red;font-size: small;font-weight: bold'>✘用户名已存在</span>");
                     $('#username').css("border-color", "red");
                 }
             }
-            //表单提交时校验 密码、验证码
-            $('#registryForm').submit(function () {
+            //点击注册时提交时校验 密码、验证码
+            $('#registryBtn').click(function () {
                 //校验密码
-                var pass = $('#password').val();
-                var passCf = $('#passwordConfirm').val();
+                var formData = new FormData($('#registryForm')[0]);
+                var pass = formData.get("password");
+                var passCf = formData.get("passwordConfirm");
+                if (formData.get("username").length == 0) {
+                    $('#username').nextAll().remove();
+                    $('#username').css("border-color", "red");
+                    return false;
+                }
                 $('#passwordConfirm').nextAll().remove();
-                if (pass != passCf) {
+                if (pass.length < 6 || passCf.length < 6) {
+                    $('#password').css("border-color", "red");
+                    $('#passwordConfirm').css("border-color", "red");
+                    $('#passwordConfirm').after("<span style='color:red;font-size: small;font-weight: bold'>✘密码填写有误</span>");
+                    return false;
+                } else if (pass != passCf) {
                     $('#password').css("border-color", "red");
                     $('#passwordConfirm').css("border-color", "red");
                     $('#passwordConfirm').after("<span style='color:red;font-size: small;font-weight: bold'>✘两次输入不一致</span>");
@@ -51,30 +59,38 @@
                     $('#password').css("border-color", "green");
                     $('#passwordConfirm').css("border-color", "green");
                 }
-                //校验验证码
-                /*$.get("/registry/verifyCode", {verifyCode : $('#verifyCode').val()}, function (data) {
-                    $('#verifyCode').nextAll().remove();
-                    $('#v_code').val(data);
-                    if (data == 0) {
-                        $('#verifyCode').css("border-color", "red");
-                        $('#verifyCode').after("<span style='color:red;font-size: small;font-weight: bold'>✘验证码错误</span>");
-                        $('#verifyCodeImg').attr('src', '/registry/getVerifyCode?' + Math.random());
-                    } else {
-                        $('#verifyCode').css("border-color", "green");
-                    }
-                });*/
-               if (status == 0) {
+                if (formData.get("verifyCode").length < 4) {
+                    $('#verifyCode').css("border-color", "red");
                     return false;
                 }
+                $.ajax({
+                    url:'/registry',
+                    type: 'post',
+                    cache: false,
+                    processData: false,
+                    contentType: false,
+                    data: formData,
+                    success: function (data) {
+                        $('#verifyCode').nextAll().remove();
+                        if (data.status == 0) {
+                            $('#verifyCode').css("border-color", "red");
+                            $('#verifyCode').after("<span style='color:red;font-size: small;font-weight: bold'>✘验证码错误</span>");
+                            $('#verifyCodeImg').attr('src', '/registry/getVerifyCode?' + Math.random());
+                        }
+                        if (data.status == 2) {
+                            $('#verifyCode').css("border-color", "green");
+                            location.href = '/registry/success?username=' + data.message;
+                        } 
+                    }
+                });
             });
-
         })
     </script>
 </head>
 <body>
 <div layout:fragment="content">
     <div id="registryDiv">
-        <form id="registryForm" th:action="@{/registrySub}" method="post">
+        <form id="registryForm" method="post">
             <div class="form-group text-center">
                 <h4>请注册</h4>
             </div>
@@ -82,35 +98,35 @@
                 <label for="username" class="col-sm-3 col-form-label">用户名</label>
                 <div class="col-sm-9">
                     <input class="form-control" id="username" name="username" minlength="2"
-                           placeholder="请使用手机号或邮箱" required>
+                           placeholder="请使用手机号或邮箱">
                 </div>
             </div>
             <div class="form-group row">
                 <label for="password" class="col-sm-3 col-form-label">登录密码</label>
                 <div class="col-sm-9">
                     <input type="password" class="form-control" id="password" name="password" minlength="6"
-                           placeholder="请至少输入6位" required>
+                           placeholder="请至少输入6位">
                 </div>
             </div>
             <div class="form-group row">
                 <label for="passwordConfirm" class="col-sm-3 col-form-label">确认密码</label>
                 <div class="col-sm-9">
                     <input type="password" class="form-control" id="passwordConfirm" name="passwordConfirm" minlength="6"
-                           placeholder="请至少输入6位" required>
+                           placeholder="请至少输入6位">
                 </div>
             </div>
             <div class="form-group row">
                 <label for="verifyCode" class="col-sm-3 col-form-label">验证码</label>
                 <div class="col-sm-4">
                     <input class="form-control" id="verifyCode" name="verifyCode" minlength="4" maxlength="4"
-                           placeholder="验证码" required>
+                           placeholder="验证码">
                 </div>
                 <div class="col-sm-4">
                     <a href="javascript:void(0)" onclick="$('#verifyCodeImg').attr('src', '/registry/getVerifyCode?' + Math.random())"><img id="verifyCodeImg" src="/registry/getVerifyCode" width="100" height="40"></a>
                 </div>
             </div>
-            <button class="btn btn-primary btn-block">立即注册</button>
         </form>
+        <button type="button" id="registryBtn" class="btn btn-primary btn-block">立即注册</button>
     </div>
     <div style="height: 200px"></div>
 </div>
