@@ -43,7 +43,7 @@ public class RegistryController {
         if (ParameterUtil.isBlank(registryVerifyCode) || !verifyCode.equalsIgnoreCase(registryVerifyCode)) {
             response.setContentType("text/html;charset=UTF-8");
             try {
-                response.getWriter().write("<script>history.go(-1);</script>");
+                response.getWriter().write("<script>alert('出错了');</script>");
             } catch (IOException e) {
                 log.info(e.getMessage(), e);
             }
