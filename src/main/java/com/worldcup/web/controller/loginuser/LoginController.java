@@ -1,13 +1,16 @@
 package com.worldcup.web.controller.loginuser;
 
+import com.worldcup.web.Constants;
 import com.worldcup.web.entity.LoginUser;
 import com.worldcup.web.service.LoginUserService;
 import com.worldcup.web.util.EncrptionUtil;
+import com.worldcup.web.util.ResponsePageUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -25,13 +28,13 @@ public class LoginController {
     @Autowired
     private LoginUserService loginUserService;
     @GetMapping("/login")
-    public String login(HttpServletRequest request, Model model) {
+    public String login(HttpServletRequest request, ModelMap model) {
         return "loginuser/login";
     }
 
     @PostMapping("/loginSub")
     public String loginSub(@RequestParam("username") String username, @RequestParam("password") String password,
-                           HttpServletRequest request, HttpServletResponse response, Model model) {
+                           HttpServletRequest request, HttpServletResponse response, ModelMap model) {
         response.setContentType("text/html;charset=UTF-8");
         HttpSession session = request.getSession();
         try {
@@ -44,13 +47,13 @@ public class LoginController {
             log.info("用户：{} 登陆成功！", user.getUsername());
             user.setPassword(null);//将用户密码去除
             session.setAttribute("user", user);
-            return "redirect:/";
+            return "redirect:"+ request.getSession().getAttribute(Constants.LOGIN_REDIRECT_URI);
         } catch (IOException e) {
             log.error(e.getMessage(),e);
         } catch (NoSuchAlgorithmException e) {
             log.error(e.getMessage(),e);
         }
-        return null;
+        return ResponsePageUtil.errorPage(model);
     }
     private boolean verifyPassword(String password, LoginUser loginUser) throws UnsupportedEncodingException, NoSuchAlgorithmException {
         String inputPass = loginUser.getUsername() + password;
