@@ -1,5 +1,6 @@
 package com.worldcup.web.config;
 
+import com.worldcup.web.Constants;
 import com.worldcup.web.entity.LoginUser;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
@@ -18,18 +19,19 @@ public class MethonInterceptor implements HandlerInterceptor {
         boolean flag = true;
         //访问路径、ip、参数打印
         Map<String, String[]> parameterMap = request.getParameterMap();
-        log.info("RequestURI：{}", request.getRequestURI());
+        String requestUri = request.getRequestURI();
+        log.info("RequestURI：{}", requestUri);
         log.info("IP：{}", request.getRemoteAddr());
         if (parameterMap.size() > 0) {
             StringBuilder params = new StringBuilder();
             for (Map.Entry<String, String[]> entry : parameterMap.entrySet()) {
                 params.append("Key：").append(entry.getKey()).append(", Value：").append(Arrays.toString(entry.getValue())).append("; ");
             }
-//            params.setLength(params.length()-2);
             log.info("RequestParams：{}", params.toString());
         }
         LoginUser user = (LoginUser) request.getSession().getAttribute("user");
         if (null == user) {
+            request.getSession().setAttribute(Constants.LOGIN_REDIRECT_URI, requestUri);
             response.sendRedirect("/login");
             flag = false;
         }
