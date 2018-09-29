@@ -12,12 +12,12 @@
     <script src="/webjars/marked/0.3.2/marked.js"></script>
     <script src="/webjars/highlightjs/9.8.0/highlight.min.js"></script>
     <style>
-        .row > div {
+        #mdForm .row > div {
             border: solid;
             padding: 0px;
         }
 
-        .row > div:first-child {
+        #mdForm .row > div:first-child {
             border-right-style: none;
         }
 
@@ -25,6 +25,11 @@
             height: 100%;
             width: 100%;
             resize: none;
+        }
+
+        #markdownText {
+            background-color: rgba(0, 0, 0, 0.75);
+            color: lightyellow;
         }
 
         #preview {
@@ -56,7 +61,8 @@
             $('#markdownText').on('keyup blur', function () {
                 var markdownString = $('#markdownText').val();
                 markdownString = marked(markdownString).replace(/\sid=".*"/g, "").replace(/==(.*)==/g, "<mark>$1</mark>")
-                    .replace(/href="(.*)"/g, "href=\"$1\" target=\"_blank\"");
+                    .replace(/href="(.*)"/g, "href=\"$1\" target=\"_blank\"").replace(/~~(.*)~~/g, "<span style='text-decoration: line-through'>$1</span>")
+                    .replace(/\+\+(.*)\+\+/g, "<span style='text-decoration: underline'>$1</span>");
                 $('#preview').html(marked(markdownString));
                 $('#htmlcode').text(markdownString);
             });
@@ -65,6 +71,7 @@
                 var end = this.selectionEnd;
                 if (e.keyCode == 13) {
                     var lineFirstText = this.value.substring(this.value.lastIndexOf("\n") + 1, start);
+                    //有序列表、无序列表回车自动填充
                     var reg = /^.*?-\s+/g;
                     if (lineFirstText.match(reg)) {
                         e.preventDefault();
@@ -77,14 +84,15 @@
                     if (lineFirstText.match(reg)) {
                         e.preventDefault();
                         reg = /^.*?\d+\.\s+/g;
-                        var olNum = reg.exec(lineFirstText).toString().trim().replace(/\./,'');
+                        var olNum = reg.exec(lineFirstText).toString().trim().replace(/\./, '');
                         ++olNum;
                         var lineSecondText = this.value.substring(start, this.value.length);
                         this.value = this.value.substring(0, start);
-                        var ul = "\r\n"+olNum+". ";
+                        var ul = "\r\n" + olNum + ". ";
                         this.value += ul + lineSecondText;
                     }
                 }
+                //tab键缩进
                 if (e.keyCode == 9) {
                     e.preventDefault();
                     var indent = '    ';
@@ -115,18 +123,19 @@
 <div layout:fragment="content">
     <div class="container">
         <div class="text-center h2">Markdown Editor</div>
-        <form id="mdForm">
-            <div class="row">
-                <div class="col-sm-6 col-md-6 col-lg-6">
-                    <textarea id="markdownText" rows="25" placeholder="请输入Markdown文本"></textarea>
+        <div class="md-toolbar"></div>
+        <form id="mdForm" style="clear: left">
+            <div style="height: 720px;border: black solid">
+                <div class="w-50 h-100 float-left">
+                    <textarea id="markdownText" placeholder="请输入Markdown文本"></textarea>
                 </div>
-                <div id="preview" class="col-sm-6 col-md-6 col-lg-6 markdown-body bg-white"></div>
-                <div id="rowThridDiv" class="col-sm-6 col-md-6 col-lg-6">
-                    <textarea id="htmlcode" name="htmlText" class="bg-transparent" rows="25" readonly></textarea>
+                <div id="preview" class="w-50 h-100 float-left markdown-body bg-white"></div>
+                <div id="rowThridDiv" class="w-50 h-100 float-left">
+                    <textarea id="htmlcode" name="htmlText" class="bg-transparent" readonly></textarea>
                 </div>
             </div>
         </form>
-        <div class="mt-2">
+        <div class="mt-2" style="clear: left">
             <button id="reviewHtml" class="btn btn-primary">查看HTML代码</button>
             <button id="exportHtml" class="btn btn-secondary" form="mdForm" formaction="/tools/markdown/expHtml"
                     formmethod="post">导出HTML
