@@ -1,0 +1,6 @@
+/*markdown工具栏*/
+.md-toolbar {float:left;width: 50%;border: black solid 1px;border-bottom: none}
+.md-toolbar ul {list-style-type: none;padding: 0;margin: 0}
+.md-toolbar li {float: left;text-align: center;padding-left: 6px}
+.md-toolbar li span:hover {cursor: pointer;text-decoration: none;color: darkgoldenrod;}
+.md-toolbar li span {display: block;width: 18px;color: rgba(0, 0, 0, 0.75);}
