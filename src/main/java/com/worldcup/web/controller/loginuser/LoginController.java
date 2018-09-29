@@ -47,7 +47,9 @@ public class LoginController {
             log.info("用户：{} 登陆成功！", user.getUsername());
             user.setPassword(null);//将用户密码去除
             session.setAttribute("user", user);
-            return "redirect:"+ request.getSession().getAttribute(Constants.LOGIN_REDIRECT_URI);
+            String requestUri = request.getSession().getAttribute(Constants.LOGIN_REDIRECT_URI) == null ?
+                    "/" : request.getSession().getAttribute(Constants.LOGIN_REDIRECT_URI).toString();
+            return "redirect:" + requestUri;
         } catch (IOException e) {
             log.error(e.getMessage(),e);
         } catch (NoSuchAlgorithmException e) {

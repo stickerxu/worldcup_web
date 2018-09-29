@@ -19,18 +19,28 @@ $(function () {
         "<li><span title=\"Link\">₪</span></li>\n" +
         "<li><span title=\"Image\">▣</span></li>\n" +
         "<li><span title=\"Code\">&lt;\/&gt;</span></li>\n" +
-        "<li><span style=\"margin-left: 8px\" title=\"Table\">▦</span></li>\n" +
+        "<li><span style=\"margin-left: 8px\" title=\"Code Block\">≡</span></li>\n" +
+        "<li><span title=\"Table\">▦</span></li>\n" +
         "</ul>");
+    var specialTitle;
     $(".md-toolbar ul li span").mousedown(function (e) {
         e.preventDefault();
+        var mdText = document.getElementById('markdownText');
         var title = $(this).attr("title");
         var selected = window.getSelection().toString();
-        var mdText = document.getElementById('markdownText');
         var start = mdText.selectionStart;
         var end = mdText.selectionEnd;
         var result = changeText(title, selected);
         mdText.value = mdText.value.substring(0,start) + result + mdText.value.substring(end);
+        //格式化后光标位置
+        if (title == 'Link') {
+            mdText.selectionEnd = mdText.value.length - (result.length - selected.length)/2 - 1;
+        } else if (title != specialTitle) {
+            mdText.selectionEnd = mdText.value.length - (result.length - selected.length)/2;
+        }
         $('#markdownText').keyup();
+        $('#markdownText').focus();
+
     });
     function changeText(title, selected) {
         switch (title) {
@@ -39,25 +49,22 @@ $(function () {
             case "Strikethrough":selected="~~"+selected+"~~";break;
             case "Insert":selected="++"+selected+"++";break;
             case "Mark":selected="=="+selected+"==";break;
-            case "Heading 1":selected="# "+selected;break;
-            case "Heading 2":selected="## "+selected;break;
-            case "Heading 3":selected="### "+selected;break;
-            case "Heading 4":selected="#### "+selected;break;
-            case "Heading 5":selected="##### "+selected;break;
-            case "Heading 6":selected="###### "+selected;break;
-            case "Horizontal rule":selected= selected + "\n--- ";break; //todo
-            case "Quote":selected="\n> "+selected;break;
+            case "Heading 1":selected="# "+selected;specialTitle = title;break;
+            case "Heading 2":selected="## "+selected;specialTitle = title;break;
+            case "Heading 3":selected="### "+selected;specialTitle = title;break;
+            case "Heading 4":selected="#### "+selected;specialTitle = title;break;
+            case "Heading 5":selected="##### "+selected;specialTitle = title;break;
+            case "Heading 6":selected="###### "+selected;specialTitle = title;break;
+            case "Horizontal rule":selected= selected + "\n--- ";specialTitle = title;break;
+            case "Quote":selected="\n> "+selected;specialTitle = title;break;
             case "Link":selected="["+selected+"]()";break;
             case "Image":selected="!["+selected+"]()";break;
             case "Code":selected="`"+selected+"`";break;
-            case "Table":selected="\n\nheader 1 | header 2\n" + "---|---\n" + "row 1 col 1 | row 1 col 2\n" + "row 2 col 1 | row 2 col 2\n"+selected;break; //todo
+            case "Code Block":selected="```\n"+selected+"\n```";break;
+            case "Table":selected="\n\nheader 1 | header 2\n" + "---|---\n" + "row 1 col 1 | row 1 col 2\n" + "row 2 col 1 | row 2 col 2\n"+selected;
+                 specialTitle = title;break;
             default:break;
         }
         return selected;
     }
 });
-/*表格模板*/
-"header 1 | header 2\n" +
-"---|---\n" +
-"row 1 col 1 | row 1 col 2\n" +
-"row 2 col 1 | row 2 col 2"
