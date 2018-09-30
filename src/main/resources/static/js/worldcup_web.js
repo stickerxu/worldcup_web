@@ -1,4 +1,5 @@
 $(function () {
+    //markdown工具栏
     $(".md-toolbar").empty();
     $(".md-toolbar").append("<ul>\n" +
         "<li><span title=\"Blod\"><b>B</b></span></li>\n" +
