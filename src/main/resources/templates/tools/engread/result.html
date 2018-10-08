@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{fragments/layout}"
+      lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>单词统计</title>
+</head>
+<body>
+<div layout:fragment="content" class="container">
+    <h2>单词统计</h2>
+    <p th:text="${'共有单词：' + count + '个'}"></p>
+    <p>出现次数排名前10的单词：</p>
+    <table class="table table-bordered table-hover table-sm w-25 text-center">
+        <tr class="thead-dark">
+            <th>序号</th>
+            <th>单词</th>
+            <th>出现次数</th>
+        </tr>
+        <tr th:each="word,wordStat : ${list}">
+            <td th:text="${wordStat.count}"></td>
+            <td th:text="${word.key}"></td>
+            <td th:text="${word.value}"></td>
+        </tr>
+    </table>
+    <div>
+        <button class="btn btn-primary" onclick="location.href='/tools/engread'">返回</button>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{fragments/layout}"
+      lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>单词统计</title>
+</head>
+<body>
+<div layout:fragment="content" class="container">
+    <h2>单词统计</h2>
+    <div>
+        <form action="/tools/engread/read" method="post" enctype="multipart/form-data">
+            <div class="form-group">
+                <label>上传文件：<small style="font-weight: bold">目前支持txt格式</small></label>
+                <input type="file" class="form-control-file" name="file">
+            </div>
+            <p>或</p>
+            <div class="form-group">
+                <label>添加内容：</label>
+                <textarea class="form-control" name="content" rows="12" cols="60"></textarea>
+            </div>
+            <button class="btn btn-primary">确定</button>
+        </form>
+    </div>
+</div>
+</body>
+</html>
