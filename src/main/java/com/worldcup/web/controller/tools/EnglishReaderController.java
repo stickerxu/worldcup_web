@@ -17,6 +17,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -48,8 +49,26 @@ public class EnglishReaderController {
         }
         List<Map.Entry<String, Integer>> list = new ArrayList<>(map.entrySet());
         Collections.sort(list,(o1, o2) -> -o1.getValue().compareTo(o2.getValue()));
-        modelMap.put("list", list);
-        modelMap.put("count",list.size());
+        Map<Integer, List<Map.Entry<String, Integer>>> mapList = cutList(list, 20);
+        modelMap.put("mapList", mapList);
+        modelMap.put("listSize", list.size());
         return "tools/engread/result";
+    }
+    private Map<Integer, List<Map.Entry<String, Integer>>> cutList(List<Map.Entry<String, Integer>> list, int cutNumber) {
+        Map<Integer, List<Map.Entry<String, Integer>>> map = new LinkedHashMap<>();
+        int listSize = list.size();
+        if (listSize > cutNumber) {
+            int cutSize = list.size() % cutNumber == 0 ? list.size()/cutNumber : list.size()/cutNumber + 1;
+            int bgSize;
+            int endSize;
+            for (int i = 0; i < cutSize; i++) {
+                bgSize = i*cutNumber;
+                endSize = bgSize+cutNumber;
+                map.put(bgSize, list.subList(bgSize, endSize > listSize ? listSize : endSize));
+            }
+        } else {
+            map.put(0, list);
+        }
+        return map;
     }
 }
