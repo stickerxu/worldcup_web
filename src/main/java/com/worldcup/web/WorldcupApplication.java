@@ -52,7 +52,7 @@ public class WorldcupApplication extends SpringBootServletInitializer {
 
         @Override
         public void addViewControllers(ViewControllerRegistry registry) {
-            registry.addViewController("/err").setViewName("/asdas");
+//            registry.addViewController("/err").setViewName("/asdas");
         }
     }
 
