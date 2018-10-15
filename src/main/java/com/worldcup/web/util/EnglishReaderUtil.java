@@ -13,10 +13,6 @@ import java.util.List;
 import java.util.Map;
 
 public class EnglishReaderUtil {
-    public static void main(String[] args) {
-        String name = "abc.txt";
-        System.out.println(name.substring(name.lastIndexOf(".")));
-    }
 
     // /Users/xujingyao/Desktop/sb_repository/article.txt
     //读取文件
