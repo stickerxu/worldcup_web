@@ -46,7 +46,6 @@ public class WorldcupApplication extends SpringBootServletInitializer {
             list.add("/breakwall/**");
             list.add("/logout");
             list.add("/user/**");
-            list.add("/adm/**");
             return list;
         }
 
