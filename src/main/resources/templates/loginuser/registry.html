@@ -14,14 +14,19 @@
     </style>
     <script>
         $(function () {
-            //异步校验用户名重复
+            //异步校验用户名格式和重复
             $('input[name=username]').blur(function () {
+                $(this).nextAll().remove();
                 var username = $(this).val();
-                if (username != '') {
-                    $(this).nextAll().remove();
-                    $(this).after("<span style='color:green;font-size: small;font-weight: bold'>检测中...</span>");
-                    $.post("/registry/verifyUsername", {username: $(this).val()}, verifyCallback);
+                //校验用户名格式
+                if (verifyUsername(username) == false) {
+                    $('#username').after("<span style='color:red;font-size: small;font-weight: bold'>✘用户名不合法</span>");
+                    $('#username').css("border-color", "red");
+                    return false;
                 }
+                //校验重复
+                $(this).after("<span style='color:green;font-size: small;font-weight: bold'>检测中...</span>");
+                $.post("/registry/verifyUsername", {username: $(this).val()}, verifyCallback);
             });
             function verifyCallback(data) {
                 $('#username').nextAll().remove();
@@ -39,7 +44,7 @@
                 var formData = new FormData($('#registryForm')[0]);
                 var pass = formData.get("password");
                 var passCf = formData.get("passwordConfirm");
-                if (formData.get("username").length == 0) {
+                if (formData.get("username").length == 0 || verifyUsername(formData.get("username")) == false) {
                     $('#username').nextAll().remove();
                     $('#username').css("border-color", "red");
                     return false;
@@ -84,7 +89,17 @@
                     }
                 });
             });
-        })
+        });
+        function verifyUsername(username) {
+            //手机号
+            var regex_phone = /^1[3-9]\d{9}$/g;
+            //邮箱
+            var regex_email = /^.*@.*\..+/g;
+            if (regex_phone.test(username) || regex_email.test(username)) {
+                return true;
+            }
+            return false;
+        }
     </script>
 </head>
 <body>
